@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">HW4L7</string>
+    <string name="Header">Оформление заказа</string>
+    <string name="Price">Цена</string>
+    <string name="Discount">Скидка</string>
+    <string name="Result">Итого</string>
+    <string name="Name">Имя</string>
+    <string name="Surname">Фамилия</string>
+    <string name="MiddleName">Отчество</string>
+    <string name="Phone">Телефон</string>
+    <string name="PayChose">Способ оплаты</string>
+    <string name="Cash">Наличными</string>
+    <string name="Card">Картой при получении</string>
+    <string name="Pay">Оплатить</string>
+</resources>
