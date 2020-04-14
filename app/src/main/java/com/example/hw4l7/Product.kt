@@ -1,6 +1,6 @@
 package com.example.hw4l7
 
-class Product (
+class Product(
     /**
      * Must be positive
      */

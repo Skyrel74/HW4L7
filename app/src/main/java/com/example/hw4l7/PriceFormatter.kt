@@ -6,5 +6,5 @@ interface PriceFormatter {
      * If price have not fractional part than it will be printed as integer
      * If price have fractional part than it will be rounded for 2 symbols after "."
      */
-    fun formatPrice(price: Double) : String
+    fun formatPrice(price: Double): String
 }

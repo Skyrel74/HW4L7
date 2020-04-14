@@ -12,11 +12,11 @@
         tools:context=".MainActivity">
 
         <TextView
-            android:id="@+id/Header"
+            android:id="@+id/CheckoutHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/Header"
+            android:text="@string/CheckoutHeader"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Header">
+            app:layout_constraintTop_toBottomOf="@+id/CheckoutHeader">
 
             <TextView
                 android:id="@+id/textView"
@@ -43,7 +43,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/Name"
+            android:id="@+id/FirstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -60,29 +60,29 @@
             android:autofillHints="" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/Surname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="@string/Surname"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/Name"
-            app:layout_constraintStart_toStartOf="@+id/Name"
-            app:layout_constraintTop_toBottomOf="@+id/Name"
+            app:layout_constraintEnd_toEndOf="@+id/FirstName"
+            app:layout_constraintStart_toStartOf="@+id/FirstName"
+            app:layout_constraintTop_toBottomOf="@+id/FirstName"
             android:autofillHints="" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/SecondName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="@string/MiddleName"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/Name"
-            app:layout_constraintStart_toStartOf="@+id/Name"
-            app:layout_constraintTop_toBottomOf="@+id/editText2"
+            app:layout_constraintEnd_toEndOf="@+id/FirstName"
+            app:layout_constraintStart_toStartOf="@+id/FirstName"
+            app:layout_constraintTop_toBottomOf="@+id/Surname"
             android:autofillHints="" />
 
         <EditText
@@ -93,9 +93,9 @@
             android:ems="10"
             android:hint="@string/Phone"
             android:inputType="phone"
-            app:layout_constraintEnd_toEndOf="@+id/Name"
-            app:layout_constraintStart_toStartOf="@+id/Name"
-            app:layout_constraintTop_toBottomOf="@+id/editText4"
+            app:layout_constraintEnd_toEndOf="@+id/FirstName"
+            app:layout_constraintStart_toStartOf="@+id/FirstName"
+            app:layout_constraintTop_toBottomOf="@+id/SecondName"
             android:autofillHints="" />
 
         <TextView
@@ -106,7 +106,7 @@
             android:text="@string/PayChose"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Phone" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -146,6 +146,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/PhoneHint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Phone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
