@@ -1,6 +1,6 @@
-package com.example.hw4l7
+package com.example.hw4l7.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,22 +10,46 @@ import android.widget.EditText
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.hw4l7.R
+import com.example.hw4l7.model.Product
+import com.example.hw4l7.presenter.CartPresenter
+import com.example.hw4l7.presenter.ProductView
+import com.example.hw4l7.ui.CatalogActivity.Companion.IS_USER_AUTH
+import com.example.hw4l7.ui.CatalogActivity.Companion.PRODUCT_ID
+import com.example.hw4l7.ui.CatalogActivity.Companion.REQUEST_AUTH
+import kotlinx.android.synthetic.main.checkout_activity.*
 import kotlin.math.round
 
-class MainActivity : AppCompatActivity(), ProductView {
+
+class CheckoutActivity : BaseActivity()/*, AppCompatActivity()*/,
+    ProductView {
 
     private val presenter = CartPresenter()
     private val tableLayout by lazy { TableLayout(this) }
+    private var isAuth = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.checkout_activity)
+
+        checkoutBackBtn.setOnClickListener {
+            finish()
+            Log.d(tag, "finished")
+        }
+
+        val productId: Int? = intent.extras?.getInt(PRODUCT_ID, -1)
+        Log.d(tag, productId.toString())
 
         presenter.attachView(this)
-
         presenter.printAllProducts()
         setListeners()
+
+        PayButton.setOnClickListener {
+            isAuth = true
+            setResult(REQUEST_AUTH, Intent().apply {
+                putExtra(IS_USER_AUTH, isAuth)
+            })
+        }
     }
 
     private fun setListeners() {

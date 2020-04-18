@@ -1,4 +1,4 @@
-package com.example.hw4l7
+package com.example.hw4l7.presenter
 
 interface PriceFormatter {
     /**

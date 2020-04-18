@@ -1,14 +1,35 @@
-package com.example.hw4l7
+package com.example.hw4l7.presenter
 
+import com.example.hw4l7.model.OrderModel
+import com.example.hw4l7.model.Product
 import moxy.MvpPresenter
 
 class CartPresenter : MvpPresenter<ProductView>() {
     private val products = listOf(
-        Product(price = 123.5, salePercent = 30, productName = "Fender Telecaster"),
-        Product(price = 119.0, salePercent = 5, productName = "Fender Stratocaster"),
-        Product(price = 112.1, salePercent = 5, productName = "Gibson Les Paul"),
-        Product(price = 119.9, salePercent = 5, productName = "Gibson ES-335"),
-        Product(price = 119.9, productName = "Gibson SG Standard")
+        Product(
+            price = 123.5,
+            salePercent = 30,
+            productName = "Fender Telecaster"
+        ),
+        Product(
+            price = 119.0,
+            salePercent = 5,
+            productName = "Fender Stratocaster"
+        ),
+        Product(
+            price = 112.1,
+            salePercent = 5,
+            productName = "Gibson Les Paul"
+        ),
+        Product(
+            price = 119.9,
+            salePercent = 5,
+            productName = "Gibson ES-335"
+        ),
+        Product(
+            price = 119.9,
+            productName = "Gibson SG Standard"
+        )
     )
 
     private val model = OrderModel()

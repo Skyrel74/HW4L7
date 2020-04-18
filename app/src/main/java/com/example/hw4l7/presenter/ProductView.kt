@@ -1,5 +1,6 @@
-package com.example.hw4l7
+package com.example.hw4l7.presenter
 
+import com.example.hw4l7.model.Product
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType

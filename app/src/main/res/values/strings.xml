@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HW4L7</string>
+    <string name="app_name">Магазин</string>
     <string name="CheckoutHeader">Оформление заказа</string>
     <string name="Price">Цена</string>
     <string name="Discount">Скидка</string>
@@ -13,4 +13,11 @@
     <string name="Card">Картой при получении</string>
     <string name="Pay">Оплатить</string>
     <string name="PhoneHint">Пример, 89999999999 или +79999999999</string>
+    <string name="catalogHeader">Католог</string>
+    <string name="catalogCheckoutBtn">Оформить заказ</string>
+    <string name="catalogProductInfoBtn">Товар</string>
+    <string name="catalogCartBtn">Корзина</string>
+    <string name="cartHeader">Корзина продуктов</string>
+    <string name="productHeader">Продукт</string>
+    <string name="backbtn">backBtn</string>
 </resources>
