@@ -3,6 +3,7 @@ package com.example.hw4l7.ui
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import com.example.hw4l7.R
 import kotlinx.android.synthetic.main.product_info_layout.*
 
@@ -11,9 +12,14 @@ class ProductInfoActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.product_info_layout)
 
-        productBackBtn.setOnClickListener {
+        setSupportActionBar(productToolbar)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home)
             finish()
-            Log.d(tag, "finished")
-        }
+        return true
     }
 }

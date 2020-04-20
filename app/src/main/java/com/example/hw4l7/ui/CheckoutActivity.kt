@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TableLayout
@@ -32,10 +33,9 @@ class CheckoutActivity : BaseActivity()/*, AppCompatActivity()*/,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.checkout_activity)
 
-        checkoutBackBtn.setOnClickListener {
-            finish()
-            Log.d(tag, "finished")
-        }
+        setSupportActionBar(checkoutToolbar)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val productId: Int? = intent.extras?.getInt(PRODUCT_ID, -1)
         Log.d(tag, productId.toString())
@@ -50,6 +50,12 @@ class CheckoutActivity : BaseActivity()/*, AppCompatActivity()*/,
                 putExtra(IS_USER_AUTH, isAuth)
             })
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home)
+            finish()
+        return true
     }
 
     private fun setListeners() {
