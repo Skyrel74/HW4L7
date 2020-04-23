@@ -4,16 +4,29 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hw4l7.R
+import com.example.hw4l7.presenter.CatalogPresenter
 import kotlinx.android.synthetic.main.catalog_layout.*
 
 
-class CatalogActivity : BaseActivity() {
+class CatalogActivity : BaseActivity(), CatalogView {
+
+    private val presenter = CatalogPresenter()
+    private val adapter = CategoryAdapter { category ->
+        presenter.removeItem(category)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.catalog_layout)
+
+        presenter.attachView(this)
+
+        categotyRv.layoutManager = LinearLayoutManager(this)
+        categotyRv.adapter = adapter
 
         productInfoBtn.setOnClickListener {
             startActivity(Intent(this, ProductInfoActivity::class.java))
@@ -33,6 +46,7 @@ class CatalogActivity : BaseActivity() {
             }
             startActivityForResult(intent, REQUEST_AUTH)
         }
+        presenter.setData()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -46,6 +60,14 @@ class CatalogActivity : BaseActivity() {
             val isUserAuth = data?.extras?.getBoolean(IS_USER_AUTH)
             Log.d(tag, "onActivityResult ${isUserAuth.toString()}")
         }
+    }
+
+    override fun setCategories(list: List<String>) {
+        adapter.setData(list)
+    }
+
+    override fun removeItem(position: Int) {
+        adapter.notifyItemRemoved(position)
     }
 
     companion object {

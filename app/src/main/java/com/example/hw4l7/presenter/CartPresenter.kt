@@ -1,68 +1,82 @@
 package com.example.hw4l7.presenter
 
-import com.example.hw4l7.model.OrderModel
 import com.example.hw4l7.model.Product
+import com.example.hw4l7.ui.CartView
 import moxy.MvpPresenter
 
-class CartPresenter : MvpPresenter<ProductView>() {
-    private val products = listOf(
+class CartPresenter : MvpPresenter<CartView>() {
+    private val products = mutableListOf(
         Product(
-            price = 123.5,
+            price = 12300.5,
             salePercent = 30,
             productName = "Fender Telecaster"
         ),
         Product(
-            price = 119.0,
+            price = 11900.0,
             salePercent = 5,
             productName = "Fender Stratocaster"
         ),
         Product(
-            price = 112.1,
+            price = 11200.1,
             salePercent = 5,
             productName = "Gibson Les Paul"
         ),
         Product(
-            price = 119.9,
+            price = 11900.9,
             salePercent = 5,
             productName = "Gibson ES-335"
         ),
         Product(
-            price = 119.9,
+            price = 11900.9,
             productName = "Gibson SG Standard"
+        ),
+        Product(
+            price = 11200.0,
+            salePercent = 13,
+            productName = "FENDER SQUIER"
+        ),
+        Product(
+            price = 17010.0,
+            salePercent = 21,
+            productName = "FENDER BULLET"
+        ),
+        Product(
+            price = 16400.0,
+            salePercent = 2,
+            productName = "IBANEZ GRX20-BKN"
+        ),
+        Product(
+            price = 18900.0,
+            productName = "FENDER HT AWT"
+        ),
+        Product(
+            price = 19000.0,
+            productName = "IBANEZ GRX70QA"
+        ),
+        Product(
+            price = 16920.0,
+            productName = "FENDER HSS AWT"
+        ),
+        Product(
+            price = 20100.0,
+            productName = "EPIPHONE SG-SPECIAL"
         )
     )
 
-    private val model = OrderModel()
-
-    private fun checkSymbols(text: String): Boolean = text.length < 3
-
-    private fun checkNumbers(phone: String): Boolean = when (phone.length) {
-        11 -> phone[0] != '8'
-        12 -> !(phone[0] == '+' && phone[1] == '7')
-        else -> true
+    fun setData() {
+        viewState.setProducts(products)
     }
 
-    fun printAllProducts() = viewState.print(products)
-
-    fun printTotalPrice() = viewState.print(products.sumByDouble { it.calcDiscountPrice() })
-
-    fun checkFirstName(name: String) {
-        if (!checkSymbols(name)) model.firstName
-        viewState.showErrorForName(checkSymbols(name))
+    fun addItem() {
+        products.add(
+            Product(54.80, 5, "Медиатор")
+        )
+        viewState.addItem(products.size)
     }
 
-    fun checkSurname(surname: String) {
-        if (!checkSymbols(surname)) model.surnname
-        viewState.showErrorForSurname(checkSymbols(surname))
-    }
-
-    fun checkSecondName(secondName: String) {
-        if (!checkSymbols(secondName)) model.secondName
-        viewState.showErrorForSecondName(checkSymbols(secondName))
-    }
-
-    fun checkPhone(phone: String) {
-        if (!checkNumbers(phone)) model.phone
-        viewState.showErrorForPhone(checkNumbers(phone))
+    fun removeItem(product: Product) {
+        val position = products.indexOf(product)
+        products.remove(product)
+        viewState.removeItem(position)
     }
 }

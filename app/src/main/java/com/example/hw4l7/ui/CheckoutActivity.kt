@@ -13,8 +13,7 @@ import android.widget.TableRow
 import android.widget.TextView
 import com.example.hw4l7.R
 import com.example.hw4l7.model.Product
-import com.example.hw4l7.presenter.CartPresenter
-import com.example.hw4l7.presenter.ProductView
+import com.example.hw4l7.presenter.CheckoutPresenter
 import com.example.hw4l7.ui.CatalogActivity.Companion.IS_USER_AUTH
 import com.example.hw4l7.ui.CatalogActivity.Companion.PRODUCT_ID
 import com.example.hw4l7.ui.CatalogActivity.Companion.REQUEST_AUTH
@@ -25,7 +24,7 @@ import kotlin.math.round
 class CheckoutActivity : BaseActivity()/*, AppCompatActivity()*/,
     ProductView {
 
-    private val presenter = CartPresenter()
+    private val presenter = CheckoutPresenter()
     private val tableLayout by lazy { TableLayout(this) }
     private var isAuth = false
 
