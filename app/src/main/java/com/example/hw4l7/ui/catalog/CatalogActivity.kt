@@ -1,35 +1,43 @@
-package com.example.hw4l7.ui
+package com.example.hw4l7.ui.catalog
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.LinearLayout
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hw4l7.R
-import com.example.hw4l7.presenter.CatalogPresenter
-import kotlinx.android.synthetic.main.catalog_layout.*
+import com.example.hw4l7.data.ViewedProductDaoImpl
+import com.example.hw4l7.presenter.catalog.CatalogPresenter
+import com.example.hw4l7.presenter.catalog.CatalogView
+import com.example.hw4l7.ui.BaseActivity
+import com.example.hw4l7.ui.checkout.CheckoutActivity
+import com.example.hw4l7.ui.DetailedActivity
+import com.example.hw4l7.ui.cart.CartActivity
+import kotlinx.android.synthetic.main.activity_catalog.*
+import moxy.ktx.moxyPresenter
+import android.content.SharedPreferences
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.hw4l7.domain.model.Cart
 
 
-class CatalogActivity : BaseActivity(), CatalogView {
+class CatalogActivity : BaseActivity(),
+    CatalogView {
 
-    private val presenter = CatalogPresenter()
-    private val adapter = CategoryAdapter { category ->
-        presenter.removeItem(category)
+    private val presenter by moxyPresenter {
+        CatalogPresenter(ViewedProductDaoImpl(sharedPreferences))
     }
+
+    private val adapter = CategoryAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.catalog_layout)
-
-        presenter.attachView(this)
+        setContentView(R.layout.activity_catalog)
 
         categotyRv.layoutManager = LinearLayoutManager(this)
         categotyRv.adapter = adapter
 
         productInfoBtn.setOnClickListener {
-            startActivity(Intent(this, ProductInfoActivity::class.java))
+            startActivity(Intent(this, DetailedActivity::class.java))
         }
 
         cartBtn.setOnClickListener {
@@ -44,9 +52,19 @@ class CatalogActivity : BaseActivity(), CatalogView {
             val intent = Intent(this, CheckoutActivity::class.java).apply {
                 putExtra(PRODUCT_ID, 1000)
             }
-            startActivityForResult(intent, REQUEST_AUTH)
+            startActivityForResult(intent,
+                REQUEST_AUTH
+            )
         }
-        presenter.setData()
+    }
+
+    override fun showProductIds(productIds: List<Long>) {
+        adapter.setData(productIds)
+        Toast.makeText(this, productIds.joinToString(","), Toast.LENGTH_LONG).show()
+    }
+
+    override fun showProducts(products: List<Cart>) {
+        Toast.makeText(this, products.joinToString { "," }, Toast.LENGTH_LONG).show()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -62,12 +80,8 @@ class CatalogActivity : BaseActivity(), CatalogView {
         }
     }
 
-    override fun setCategories(list: List<String>) {
+    override fun setCategories(list: List<Long>) {
         adapter.setData(list)
-    }
-
-    override fun removeItem(position: Int) {
-        adapter.notifyItemRemoved(position)
     }
 
     companion object {
@@ -76,4 +90,7 @@ class CatalogActivity : BaseActivity(), CatalogView {
         const val IS_USER_AUTH = "IS_USER_AUTH"
         const val SAVE_SATE_INT = "SAVE_SATE_INT"
     }
+
+    private val AppCompatActivity.sharedPreferences: SharedPreferences
+        get() = getSharedPreferences("data", MODE_PRIVATE)
 }

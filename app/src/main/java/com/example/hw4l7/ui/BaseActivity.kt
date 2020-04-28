@@ -6,9 +6,10 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.hw4l7.R
+import moxy.MvpAppCompatActivity
 
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : MvpAppCompatActivity() {
     val tag = this.javaClass.simpleName
 
     public override fun onCreate(savedInstanceState: Bundle?) {

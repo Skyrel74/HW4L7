@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvHeaderProductName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/title_header"
+        android:textColor="@android:color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/tvHeaderPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="55dp"
+        android:text="@string/price_header"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/tvHeaderProductName"
+        app:layout_constraintLeft_toRightOf="@id/tvHeaderProductName"
+        app:layout_constraintTop_toTopOf="@id/tvHeaderProductName"
+        android:layout_marginStart="55dp" />
+
+    <TextView
+        android:id="@+id/tvHeaderDiscount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/discount_price"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/tvHeaderPrice"
+        app:layout_constraintLeft_toRightOf="@id/tvHeaderPrice"
+        app:layout_constraintRight_toLeftOf="@id/tvHeaderDiscountPrice"
+        app:layout_constraintTop_toTopOf="@id/tvHeaderPrice" />
+
+    <TextView
+        android:id="@+id/tvHeaderDiscountPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="@string/total_price"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/tvHeaderDiscount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvHeaderDiscount" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cartProducts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnApply"
+        app:layout_constraintTop_toBottomOf="@id/tvHeaderProductName"
+        tools:layout_editor_absoluteX="10dp" />
+
+    <Button
+        android:id="@+id/btnApply"
+        style="@style/bigPrimaryBackground"
+        android:layout_margin="10dp"
+        android:text="@string/btn_buy_cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

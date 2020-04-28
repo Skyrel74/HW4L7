@@ -1,12 +1,12 @@
-package com.example.hw4l7.ui
+package com.example.hw4l7.presenter.checkout
 
-import com.example.hw4l7.model.Product
+import com.example.hw4l7.domain.model.Product
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface ProductView : MvpView {
+interface CheckoutView : MvpView {
     /**
      * Outputs price in <PRICE>P format or <NAME>: <PRICE>P format.
      */

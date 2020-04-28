@@ -1,4 +1,4 @@
-package com.example.hw4l7.ui
+package com.example.hw4l7.presenter.checkout
 
 interface PriceFormatter {
     /**

@@ -1,4 +1,4 @@
-package com.example.hw4l7.ui
+package com.example.hw4l7.ui.checkout
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,25 +12,28 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import com.example.hw4l7.R
-import com.example.hw4l7.model.Product
-import com.example.hw4l7.presenter.CheckoutPresenter
-import com.example.hw4l7.ui.CatalogActivity.Companion.IS_USER_AUTH
-import com.example.hw4l7.ui.CatalogActivity.Companion.PRODUCT_ID
-import com.example.hw4l7.ui.CatalogActivity.Companion.REQUEST_AUTH
-import kotlinx.android.synthetic.main.checkout_activity.*
+import com.example.hw4l7.domain.model.Product
+import com.example.hw4l7.presenter.checkout.CheckoutPresenter
+import com.example.hw4l7.presenter.checkout.CheckoutView
+import com.example.hw4l7.ui.BaseActivity
+import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.IS_USER_AUTH
+import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.PRODUCT_ID
+import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.REQUEST_AUTH
+import kotlinx.android.synthetic.main.activity_checkout.*
 import kotlin.math.round
 
 
 class CheckoutActivity : BaseActivity()/*, AppCompatActivity()*/,
-    ProductView {
+    CheckoutView {
 
-    private val presenter = CheckoutPresenter()
+    private val presenter =
+        CheckoutPresenter()
     private val tableLayout by lazy { TableLayout(this) }
     private var isAuth = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.checkout_activity)
+        setContentView(R.layout.activity_checkout)
 
         setSupportActionBar(checkoutToolbar)
         supportActionBar?.setHomeButtonEnabled(true)
@@ -40,7 +43,6 @@ class CheckoutActivity : BaseActivity()/*, AppCompatActivity()*/,
         Log.d(tag, productId.toString())
 
         presenter.attachView(this)
-        presenter.printAllProducts()
         setListeners()
 
         PayButton.setOnClickListener {
@@ -118,70 +120,7 @@ class CheckoutActivity : BaseActivity()/*, AppCompatActivity()*/,
     }
 
     override fun print(products: List<Product>) {
-        val header = listOf(
-            resources.getString(R.string.Price),
-            resources.getString(R.string.Discount),
-            resources.getString(R.string.Result)
-        )
 
-        val rows = products.size
-        // Захардкодил, потому что не знал как взять число полей класса
-        val columns = 3
-        val tableParams = TableLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-        tableLayout.apply {
-            layoutParams = tableParams
-            isStretchAllColumns = true
-        }
-
-        val headerRow = TableRow(this)
-        headerRow.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        for (j in 0 until columns) {
-            val textView = TextView(this).apply {
-                layoutParams = TableRow.LayoutParams(
-                    TableRow.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.WRAP_CONTENT
-                )
-                text = header[j]
-            }
-            headerRow.addView(textView)
-        }
-        tableLayout.addView(headerRow)
-
-        for (i in 0 until rows) {
-            val row = TableRow(this)
-            row.layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-
-            val textViews = listOf(
-                TextView(this),
-                TextView(this),
-                TextView(this)
-            )
-            textViews.forEach {
-                it.apply {
-                    layoutParams = TableRow.LayoutParams(
-                        TableRow.LayoutParams.WRAP_CONTENT,
-                        TableRow.LayoutParams.WRAP_CONTENT
-                    )
-                }
-            }
-            textViews[0].text = formatPrice(products[i].getPrice())
-            textViews[1].text = products[i].getSalePercent().toString()
-            textViews[2].text = formatPrice(products[i].calcDiscountPrice())
-            textViews.forEach { row.addView(it) }
-
-            tableLayout.addView(row)
-        }
-
-        linearLayout.addView(tableLayout)
     }
 
     override fun print(name: String, price: Double) {

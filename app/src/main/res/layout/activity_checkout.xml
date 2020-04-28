@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.CheckoutActivity">
+        tools:context=".ui.checkout.CheckoutActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/checkoutToolbar"
