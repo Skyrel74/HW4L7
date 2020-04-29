@@ -2,10 +2,6 @@ package com.example.hw4l7.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import com.example.hw4l7.R
 import moxy.MvpAppCompatActivity
 
 

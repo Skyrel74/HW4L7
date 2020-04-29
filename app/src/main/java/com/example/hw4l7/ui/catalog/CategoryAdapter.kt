@@ -8,13 +8,12 @@ import com.example.hw4l7.R
 import com.example.hw4l7.domain.model.Cart
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.categoty_item.*
-import kotlinx.android.synthetic.main.categoty_item.view.*
 
 class CategoryAdapter() : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
-    private var categories: List<Long> = listOf()
+    private var categories: List<Cart> = listOf()
 
-    fun setData(categories: List<Long>) {
+    fun setData(categories: List<Cart>) {
         this.categories = categories
         notifyDataSetChanged()
     }
@@ -33,10 +32,10 @@ class CategoryAdapter() : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
     inner class ViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-        fun bind(cart: Long) {
-            categotyIdTv.text = cart.toString()//.id.toString()
-            //categotyNameTv.text = cart.product.name
-            //categotyPriceTv.text = cart.product.price.toString()
+        fun bind(cart: Cart) {
+            categotyIdTv.text = cart.id.toString()
+            categotyNameTv.text = cart.product.name
+            categotyPriceTv.text = cart.product.price.toString()
         }
     }
 

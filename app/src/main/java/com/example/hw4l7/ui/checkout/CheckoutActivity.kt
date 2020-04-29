@@ -6,11 +6,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TableLayout
-import android.widget.TableRow
-import android.widget.TextView
 import com.example.hw4l7.R
 import com.example.hw4l7.domain.model.Product
 import com.example.hw4l7.presenter.checkout.CheckoutPresenter
@@ -20,15 +17,15 @@ import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.IS_USER_AUTH
 import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.PRODUCT_ID
 import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.REQUEST_AUTH
 import kotlinx.android.synthetic.main.activity_checkout.*
+import moxy.ktx.moxyPresenter
 import kotlin.math.round
 
 
-class CheckoutActivity : BaseActivity()/*, AppCompatActivity()*/,
-    CheckoutView {
+class CheckoutActivity : BaseActivity(), CheckoutView {
 
-    private val presenter =
+    private val presenter by moxyPresenter {
         CheckoutPresenter()
-    private val tableLayout by lazy { TableLayout(this) }
+    }
     private var isAuth = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +39,6 @@ class CheckoutActivity : BaseActivity()/*, AppCompatActivity()*/,
         val productId: Int? = intent.extras?.getInt(PRODUCT_ID, -1)
         Log.d(tag, productId.toString())
 
-        presenter.attachView(this)
         setListeners()
 
         PayButton.setOnClickListener {
@@ -119,9 +115,7 @@ class CheckoutActivity : BaseActivity()/*, AppCompatActivity()*/,
         Log.d("App Output", "${formatPrice(price)}P")
     }
 
-    override fun print(products: List<Product>) {
-
-    }
+    override fun print(products: List<Product>) {}
 
     override fun print(name: String, price: Double) {
         Log.d("App Output", "$name: ${formatPrice(price)}P")

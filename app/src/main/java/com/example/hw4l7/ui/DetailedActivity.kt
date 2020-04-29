@@ -2,7 +2,6 @@ package com.example.hw4l7.ui
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.hw4l7.R
@@ -33,6 +32,7 @@ class DetailedActivity : BaseActivity(), DetailedView {
             .into(ivDetailedImage)
         tvDetailedTitle.text = product.product.name
         tvDetailedPrice.text = product.product.calcDiscountPrice().toString()
+
         presenter.onProductShow(product)
     }
 
@@ -40,6 +40,6 @@ class DetailedActivity : BaseActivity(), DetailedView {
         const val PRODUCT_TAG = "PRODUCT_TAG"
     }
 
-    val AppCompatActivity.sharedPreferences: SharedPreferences
+    private val AppCompatActivity.sharedPreferences: SharedPreferences
         get() = getSharedPreferences("data", MODE_PRIVATE)
 }

@@ -2,7 +2,6 @@ package com.example.hw4l7.presenter.catalog
 
 import com.example.hw4l7.domain.ViewedProductDao
 import com.example.hw4l7.domain.model.Cart
-import com.example.hw4l7.domain.model.CartFactory
 import moxy.InjectViewState
 import moxy.MvpPresenter
 
@@ -11,7 +10,7 @@ class CatalogPresenter(
     private val viewedProductDao: ViewedProductDao
 ) : MvpPresenter<CatalogView>() {
 
-    private val list = mutableListOf<Long>()
+    private val list = mutableListOf<Cart>()
 
     private fun setData() = viewState.setCategories(list)
 
@@ -22,7 +21,7 @@ class CatalogPresenter(
 
     override fun attachView(view: CatalogView?) {
         super.attachView(view)
-        val products = viewedProductDao.getAllProductIds()
-        viewState.showProductIds(products)
+        val products = viewedProductDao.getAllProducts()
+        viewState.setCategories(products)
     }
 }

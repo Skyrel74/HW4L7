@@ -9,6 +9,6 @@ import moxy.MvpPresenter
 class DetailedPresenter(private val viewedProductDao: ViewedProductDao) :
     MvpPresenter<DetailedView>() {
     fun onProductShow(product: Cart) {
-        viewedProductDao.addProduct(product.id.toLong())
+        viewedProductDao.addProduct(product)
     }
 }

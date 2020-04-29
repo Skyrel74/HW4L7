@@ -5,15 +5,9 @@ import com.example.hw4l7.domain.model.Cart
 interface ViewedProductDao {
 
     /**
-     * save this product id as viewed
+     * save this product as viewed
      * */
-    fun addProduct(productId: Long)
-
-    /**
-     * get all viewed product ids
-     * might be empty
-     * */
-    fun getAllProductIds(): List<Long>
+    fun addProduct(product: Cart)
 
     /**
      * get all viewed products

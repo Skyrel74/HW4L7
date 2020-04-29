@@ -1,51 +1,36 @@
 package com.example.hw4l7.data
 
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.core.content.edit
 import com.example.hw4l7.domain.ViewedProductDao
 import com.example.hw4l7.domain.model.Cart
-import com.example.hw4l7.domain.model.CartFactory
-import com.example.hw4l7.domain.model.Product
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class ViewedProductDaoImpl(
     private val sharedPreferences: SharedPreferences
 ) : ViewedProductDao {
 
-    private val factory = CartFactory()
-
-    private var savedProductIds: List<Long>
-        get() = sharedPreferences.getString(PRODUCT_TAG, null)
-            ?.split(",")
-            ?.mapNotNull { it.toLongOrNull() } ?: emptyList()
-        set(value) {
-            sharedPreferences.edit {
-                putString(PRODUCT_TAG, value.joinToString(","))
-            }
-        }
-
     private var savedProducts: List<Cart>
-        get() = sharedPreferences.getString(PRODUCT_TAG, null)
-            ?.split(",")
-            ?.map { factory.createCartProduct(it) }
-            ?: emptyList()
+        get() {
+            val historyStr = sharedPreferences.getString(PRODUCT_TAG, null)
+            return if (historyStr != null) {
+                Gson().fromJson(historyStr, (object : TypeToken<List<Cart>>() {}).type)
+            } else emptyList()
+        }
         set(value) {
             sharedPreferences.edit {
-                putString(PRODUCT_TAG, value.joinToString(","))
+                putString(PRODUCT_TAG, Gson().toJson(value)).apply()
             }
         }
 
-    override fun addProduct(productId: Long) {
-        val productIds: List<Long> = savedProductIds
-        val newProductIds = mutableListOf<Long>().apply {
-            add(productId)
-            addAll(productIds.filter { it != productId })
+    override fun addProduct(product: Cart) {
+        val products: List<Cart> = savedProducts
+        val newProducts = mutableListOf<Cart>().apply {
+            add(product)
+            addAll(products.filter { it.id != product.id })
         }
-        savedProductIds = newProductIds
-    }
-
-    override fun getAllProductIds(): List<Long> {
-        return savedProductIds
+        savedProducts = newProducts
     }
 
     override fun getAllProducts(): List<Cart> {

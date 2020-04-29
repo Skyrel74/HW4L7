@@ -15,13 +15,11 @@ import com.example.hw4l7.ui.cart.CartActivity
 import kotlinx.android.synthetic.main.activity_catalog.*
 import moxy.ktx.moxyPresenter
 import android.content.SharedPreferences
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hw4l7.domain.model.Cart
 
 
-class CatalogActivity : BaseActivity(),
-    CatalogView {
+class CatalogActivity : BaseActivity(), CatalogView {
 
     private val presenter by moxyPresenter {
         CatalogPresenter(ViewedProductDaoImpl(sharedPreferences))
@@ -44,27 +42,15 @@ class CatalogActivity : BaseActivity(),
             startActivity(Intent(this, CartActivity::class.java))
         }
 
-        Log.d(tag, "savedInstanceState = $savedInstanceState")
-        val savedInt = savedInstanceState?.getInt(SAVE_SATE_INT)
-        Log.d(tag, "savedInt $savedInt")
-
         catalogCheckoutbtn.setOnClickListener {
             val intent = Intent(this, CheckoutActivity::class.java).apply {
                 putExtra(PRODUCT_ID, 1000)
             }
-            startActivityForResult(intent,
+            startActivityForResult(
+                intent,
                 REQUEST_AUTH
             )
         }
-    }
-
-    override fun showProductIds(productIds: List<Long>) {
-        adapter.setData(productIds)
-        Toast.makeText(this, productIds.joinToString(","), Toast.LENGTH_LONG).show()
-    }
-
-    override fun showProducts(products: List<Cart>) {
-        Toast.makeText(this, products.joinToString { "," }, Toast.LENGTH_LONG).show()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -80,7 +66,7 @@ class CatalogActivity : BaseActivity(),
         }
     }
 
-    override fun setCategories(list: List<Long>) {
+    override fun setCategories(list: List<Cart>) {
         adapter.setData(list)
     }
 

@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hw4l7.R
 import com.example.hw4l7.domain.model.Cart
-import com.example.hw4l7.domain.model.Product
 import com.example.hw4l7.presenter.cart.CartPresenter
 import com.example.hw4l7.ui.BaseActivity
 import com.example.hw4l7.presenter.cart.CartView
@@ -14,8 +13,7 @@ import com.example.hw4l7.ui.DetailedActivity.Companion.PRODUCT_TAG
 import kotlinx.android.synthetic.main.activity_cart.*
 import moxy.ktx.moxyPresenter
 
-class CartActivity : BaseActivity(),
-    CartView {
+class CartActivity : BaseActivity(), CartView {
 
     private lateinit var cardAdapter: CartAdapter
     private val presenter by moxyPresenter { CartPresenter() }

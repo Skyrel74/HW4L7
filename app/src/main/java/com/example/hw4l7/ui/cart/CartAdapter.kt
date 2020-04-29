@@ -3,19 +3,12 @@ package com.example.hw4l7.ui.cart
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hw4l7.R
 import com.example.hw4l7.domain.model.Cart
-import com.example.hw4l7.domain.model.Product
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.cart_item.*
-import kotlinx.android.synthetic.main.cart_item.view.*
-import kotlinx.android.synthetic.main.cart_item.view.tvCartItemDiscount
-import kotlinx.android.synthetic.main.cart_item.view.tvCartItemDiscountPrice
-import kotlinx.android.synthetic.main.cart_item.view.tvCartItemPrice
-import kotlinx.android.synthetic.main.cart_item.view.tvCartItemTitle
 
 class CartAdapter(
     private val onProductClick: (Cart) -> Unit
