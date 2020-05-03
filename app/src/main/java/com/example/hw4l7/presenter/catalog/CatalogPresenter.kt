@@ -1,27 +1,30 @@
 package com.example.hw4l7.presenter.catalog
 
+import com.example.hw4l7.domain.MainApi
+import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.domain.ViewedProductDao
-import com.example.hw4l7.domain.model.Cart
+import com.example.hw4l7.presenter.BasePresenter
+import kotlinx.coroutines.launch
 import moxy.InjectViewState
-import moxy.MvpPresenter
 
 @InjectViewState
 class CatalogPresenter(
-    private val viewedProductDao: ViewedProductDao
-) : MvpPresenter<CatalogView>() {
+    private val viewedProductDao: ViewedProductDao,
+    private val mainApi: MainApi
+) : BasePresenter<CatalogView>() {
 
-    private val list = mutableListOf<Cart>()
-
-    private fun setData() = viewState.setCategories(list)
+    private val list = mutableListOf<RemoteProduct>()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        setData()
+        launch {
+            val products = mainApi.allProducts(author = "default")
+            viewState.setProducts(products)
+        }
     }
 
-    override fun attachView(view: CatalogView?) {
-        super.attachView(view)
-        val products = viewedProductDao.getAllProducts()
-        viewState.setCategories(products)
+    override fun onFailure(e: Throwable) {
+        super.onFailure(e)
+        viewState.showInternetError()
     }
 }

@@ -20,7 +20,11 @@
     <string name="cartHeader">Корзина продуктов</string>
     <string name="productHeader">Продукт</string>
     <string name="backbtn">backBtn</string>
-    <string name="productName">Наименование</string>
+
+    <!-- Catalog -->
+    <string name="productName">Name</string>
+    <string name="productPrice">Price</string>
+    <string name="productDiscount">Discount</string>
 
     <!--Cart-->
     <string name="btn_buy_cart">Оформить заказ</string>
@@ -36,5 +40,4 @@
     <string name="price_with_discount">Итог</string>
     <string name="detailed_photo_title">detailed_photo</string>
     <string name="some_text">someText</string>
-    <string name="categotyIdTv">Id</string>
 </resources>

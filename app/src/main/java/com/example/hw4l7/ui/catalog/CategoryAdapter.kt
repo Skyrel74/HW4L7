@@ -5,15 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hw4l7.R
-import com.example.hw4l7.domain.model.Cart
+import com.example.hw4l7.domain.RemoteProduct
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.categoty_item.*
 
 class CategoryAdapter() : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
-    private var categories: List<Cart> = listOf()
+    private var categories: List<RemoteProduct> = listOf()
 
-    fun setData(categories: List<Cart>) {
+    fun setData(categories: List<RemoteProduct>) {
         this.categories = categories
         notifyDataSetChanged()
     }
@@ -32,10 +32,10 @@ class CategoryAdapter() : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
     inner class ViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-        fun bind(cart: Cart) {
-            categotyIdTv.text = cart.id.toString()
-            categotyNameTv.text = cart.product.name
-            categotyPriceTv.text = cart.product.price.toString()
+        fun bind(product: RemoteProduct) {
+            productNameTv.text = product.name
+            productPriceTv.text = product.price.toString()
+            productDiscountTv.text = product.discountPercent.toString()
         }
     }
 

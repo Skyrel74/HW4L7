@@ -1,28 +1,39 @@
 package com.example.hw4l7.ui.catalog
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hw4l7.R
 import com.example.hw4l7.data.ViewedProductDaoImpl
+import com.example.hw4l7.domain.MainApi
+import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.presenter.catalog.CatalogPresenter
 import com.example.hw4l7.presenter.catalog.CatalogView
 import com.example.hw4l7.ui.BaseActivity
-import com.example.hw4l7.ui.checkout.CheckoutActivity
 import com.example.hw4l7.ui.DetailedActivity
 import com.example.hw4l7.ui.cart.CartActivity
+import com.example.hw4l7.ui.checkout.CheckoutActivity
 import kotlinx.android.synthetic.main.activity_catalog.*
 import moxy.ktx.moxyPresenter
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
-import com.example.hw4l7.domain.model.Cart
-
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class CatalogActivity : BaseActivity(), CatalogView {
 
     private val presenter by moxyPresenter {
-        CatalogPresenter(ViewedProductDaoImpl(sharedPreferences))
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://207.254.71.167:9191")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(MainApi::class.java)
+        CatalogPresenter(
+            mainApi = service,
+            viewedProductDao = ViewedProductDaoImpl(sharedPreferences)
+        )
     }
 
     private val adapter = CategoryAdapter()
@@ -66,8 +77,12 @@ class CatalogActivity : BaseActivity(), CatalogView {
         }
     }
 
-    override fun setCategories(list: List<Cart>) {
+    override fun setProducts(list: List<RemoteProduct>) {
         adapter.setData(list)
+    }
+
+    override fun showInternetError() {
+        Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show()
     }
 
     companion object {
