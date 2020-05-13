@@ -6,6 +6,8 @@ import com.example.hw4l7.domain.ViewedProductDao
 import com.example.hw4l7.presenter.BasePresenter
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
+import java.net.ConnectException
+import java.net.UnknownHostException
 
 @InjectViewState
 class CatalogPresenter(
@@ -25,6 +27,11 @@ class CatalogPresenter(
 
     override fun onFailure(e: Throwable) {
         super.onFailure(e)
-        viewState.showInternetError()
+        if (e is ConnectException)
+            viewState.showInternetError()
+    }
+
+    fun onProductClick(product: RemoteProduct) {
+        viewState.showProductDetailed(product)
     }
 }

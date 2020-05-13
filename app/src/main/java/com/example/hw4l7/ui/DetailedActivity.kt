@@ -2,10 +2,12 @@ package com.example.hw4l7.ui
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.hw4l7.R
 import com.example.hw4l7.data.ViewedProductDaoImpl
+import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.domain.model.Cart
 import com.example.hw4l7.presenter.detailed.DetailedPresenter
 import com.example.hw4l7.presenter.detailed.DetailedView
@@ -24,16 +26,21 @@ class DetailedActivity : BaseActivity(), DetailedView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed)
 
-        val product = intent?.getParcelableExtra<Cart>(PRODUCT_TAG) ?: return
+        val product = intent?.getParcelableExtra<RemoteProduct>(PRODUCT_TAG) ?: return
         Glide
             .with(ivDetailedImage.context)
             .load(product.imageUrl)
             .error(R.mipmap.ic_launcher)
             .into(ivDetailedImage)
-        tvDetailedTitle.text = product.product.name
-        tvDetailedPrice.text = product.product.calcDiscountPrice().toString()
+        tvDetailedTitle.text = product.name
+        tvDetailedPrice.text = product.calcDiscountPrice().toString()
 
         presenter.onProductShow(product)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     companion object {

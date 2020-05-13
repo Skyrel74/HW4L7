@@ -40,4 +40,5 @@
     <string name="price_with_discount">Итог</string>
     <string name="detailed_photo_title">detailed_photo</string>
     <string name="some_text">someText</string>
+    <string name="productImg">ProductImage</string>
 </resources>
