@@ -1,5 +1,6 @@
 package com.example.hw4l7.presenter.catalog
 
+import com.example.hw4l7.domain.Category
 import com.example.hw4l7.domain.RemoteProduct
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
@@ -11,6 +12,9 @@ interface CatalogView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun setProducts(list: List<RemoteProduct>)
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun setCategories(list: List<Category>)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showInternetError()

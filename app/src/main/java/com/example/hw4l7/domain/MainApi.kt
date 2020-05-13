@@ -6,6 +6,13 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 @Parcelize
+data class Category(
+    val name: String,
+    val products: List<RemoteProduct>
+) : Parcelable
+
+
+@Parcelize
 data class RemoteProduct(
     val id: String,
     val name: String,
@@ -28,7 +35,7 @@ data class RemoteProduct(
 
 interface MainApi {
 
-    @GET("products/all/{author}")
-    suspend fun allProducts(@Path("author") author: String): List<RemoteProduct>
+    @GET("products/allWithCategories/{author}/")
+    suspend fun allProducts(@Path("author") author: String): List<Category>
 
 }

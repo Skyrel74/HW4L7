@@ -13,9 +13,9 @@ import com.example.hw4l7.domain.RemoteProduct
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.catalog_item.*
 
-class CatalogAdapter(
+class ProductAdapter(
     private val onProductClick: (RemoteProduct) -> Unit
-) : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     private var categories: List<RemoteProduct> = listOf()
     lateinit var context: Context
