@@ -22,7 +22,7 @@
 
         <activity android:name=".ui.checkout.CheckoutActivity" />
         <activity android:name=".ui.cart.CartActivity" />
-        <activity android:name=".ui.DetailedActivity" />
+        <activity android:name=".ui.detailed.DetailedActivity" />
     </application>
 
 </manifest>

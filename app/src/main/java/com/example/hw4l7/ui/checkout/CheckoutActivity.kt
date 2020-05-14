@@ -1,18 +1,22 @@
 package com.example.hw4l7.ui.checkout
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
 import android.widget.EditText
-import android.widget.TableLayout
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.hw4l7.R
+import com.example.hw4l7.data.AddedProductDaoImpl
 import com.example.hw4l7.domain.model.Product
 import com.example.hw4l7.presenter.checkout.CheckoutPresenter
 import com.example.hw4l7.presenter.checkout.CheckoutView
 import com.example.hw4l7.ui.BaseActivity
+import com.example.hw4l7.ui.catalog.CatalogActivity
 import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.IS_USER_AUTH
 import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.PRODUCT_ID
 import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.REQUEST_AUTH
@@ -24,7 +28,9 @@ import kotlin.math.round
 class CheckoutActivity : BaseActivity(), CheckoutView {
 
     private val presenter by moxyPresenter {
-        CheckoutPresenter()
+        CheckoutPresenter(
+            AddedProductDaoImpl(sharedPreferences)
+        )
     }
     private var isAuth = false
 
@@ -46,6 +52,9 @@ class CheckoutActivity : BaseActivity(), CheckoutView {
             setResult(REQUEST_AUTH, Intent().apply {
                 putExtra(IS_USER_AUTH, isAuth)
             })
+            presenter.clearCart()
+            Toast.makeText(this, "Покупка успешна", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, CatalogActivity::class.java))
         }
     }
 
@@ -120,4 +129,7 @@ class CheckoutActivity : BaseActivity(), CheckoutView {
     override fun print(name: String, price: Double) {
         Log.d("App Output", "$name: ${formatPrice(price)}P")
     }
+
+    private val AppCompatActivity.sharedPreferences: SharedPreferences
+        get() = getSharedPreferences("data", MODE_PRIVATE)
 }

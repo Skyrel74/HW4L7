@@ -38,5 +38,4 @@ class CategoryAdapter(
             containerView.setOnClickListener { onCategoryClick(category) }
         }
     }
-
 }

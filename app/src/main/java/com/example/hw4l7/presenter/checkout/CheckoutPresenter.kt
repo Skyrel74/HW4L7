@@ -1,11 +1,14 @@
 package com.example.hw4l7.presenter.checkout
 
+import com.example.hw4l7.data.AddedProductDaoImpl
 import com.example.hw4l7.domain.model.OrderModel
 import moxy.InjectViewState
 import moxy.MvpPresenter
 
 @InjectViewState
-class CheckoutPresenter : MvpPresenter<CheckoutView>() {
+class CheckoutPresenter(
+    private val addedProductDao: AddedProductDaoImpl
+) : MvpPresenter<CheckoutView>() {
 
     private val model = OrderModel()
 
@@ -36,4 +39,6 @@ class CheckoutPresenter : MvpPresenter<CheckoutView>() {
         if (!checkNumbers(phone)) model.phone
         viewState.showErrorForPhone(checkNumbers(phone))
     }
+
+    fun clearCart() = addedProductDao.clearCart()
 }

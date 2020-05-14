@@ -10,34 +10,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:layout_marginStart="10dp"
         android:text="@string/title_header"
         android:textColor="@android:color/black"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="10dp" />
+        app:layout_constraintEnd_toStartOf="@+id/tvHeaderPrice"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvHeaderPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="55dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="@string/price_header"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="@id/tvHeaderProductName"
-        app:layout_constraintLeft_toRightOf="@id/tvHeaderProductName"
-        app:layout_constraintTop_toTopOf="@id/tvHeaderProductName"
-        android:layout_marginStart="55dp" />
+        app:layout_constraintEnd_toStartOf="@+id/tvHeaderDiscount"
+        app:layout_constraintStart_toEndOf="@+id/tvHeaderProductName"
+        app:layout_constraintTop_toTopOf="@id/tvHeaderProductName" />
 
     <TextView
         android:id="@+id/tvHeaderDiscount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="@string/discount_price"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="@id/tvHeaderPrice"
-        app:layout_constraintLeft_toRightOf="@id/tvHeaderPrice"
-        app:layout_constraintRight_toLeftOf="@id/tvHeaderDiscountPrice"
+        app:layout_constraintEnd_toStartOf="@+id/tvHeaderDiscountPrice"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvHeaderPrice"
         app:layout_constraintTop_toTopOf="@id/tvHeaderPrice" />
 
     <TextView
@@ -48,26 +50,46 @@
         android:layout_marginRight="32dp"
         android:text="@string/total_price"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="@id/tvHeaderDiscount"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvHeaderDiscount"
         app:layout_constraintTop_toTopOf="@id/tvHeaderDiscount" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cartProducts"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnApply"
-        app:layout_constraintTop_toBottomOf="@id/tvHeaderProductName"
-        tools:layout_editor_absoluteX="10dp" />
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvHeaderProductName">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cartProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            tools:layout_editor_absoluteX="10dp"
+            android:paddingBottom="225dp" />
+    </ScrollView>
 
     <Button
         android:id="@+id/btnApply"
         style="@style/bigPrimaryBackground"
         android:layout_margin="10dp"
         android:text="@string/btn_buy_cart"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/colorPrimary"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

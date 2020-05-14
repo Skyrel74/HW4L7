@@ -6,26 +6,23 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hw4l7.R
-import com.example.hw4l7.domain.model.Cart
+import com.example.hw4l7.domain.RemoteProduct
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.cart_item.*
 
-class CartAdapter(
-    private val onProductClick: (Cart) -> Unit
-) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
-    private var dataSet: List<Cart> = listOf()
+    private var dataSet: List<RemoteProduct> = listOf()
 
     inner class ViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView),
         LayoutContainer {
 
-        fun bind(item: Cart) {
-            containerView.setOnClickListener { onProductClick(item) }
-            tvCartItemTitle.text = item.product.name
-            tvCartItemPrice.text = item.product.price.toString()
-            tvCartItemDiscount.text = "${item.product.salePercent} %"
-            tvCartItemDiscountPrice.text = item.product.calcDiscountPrice().toString()
+        fun bind(product: RemoteProduct) {
+            tvCartItemTitle.text = product.name
+            tvCartItemPrice.text = product.price.toString()
+            tvCartItemDiscount.text = "${product.discountPercent} %"
+            tvCartItemDiscountPrice.text = product.calcDiscountPrice().toString()
         }
     }
 
@@ -35,14 +32,12 @@ class CartAdapter(
         return ViewHolder(layout)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = dataSet[position]
-        holder.bind(item)
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
+        holder.bind(dataSet[position])
 
     override fun getItemCount(): Int = dataSet.size
 
-    fun changeItemSource(products: List<Cart>) {
+    fun changeItemSource(products: List<RemoteProduct>) {
         dataSet = products
         notifyDataSetChanged()
     }

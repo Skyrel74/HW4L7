@@ -1,29 +1,30 @@
 package com.example.hw4l7.ui.catalog
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hw4l7.R
-import com.example.hw4l7.data.ViewedProductDaoImpl
 import com.example.hw4l7.domain.Category
 import com.example.hw4l7.domain.MainApi
 import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.presenter.catalog.CatalogPresenter
 import com.example.hw4l7.presenter.catalog.CatalogView
 import com.example.hw4l7.ui.BaseActivity
-import com.example.hw4l7.ui.DetailedActivity
-import com.example.hw4l7.ui.DetailedActivity.Companion.PRODUCT_TAG
+import com.example.hw4l7.ui.cart.CartActivity
+import com.example.hw4l7.ui.detailed.DetailedActivity
+import com.example.hw4l7.ui.detailed.DetailedActivity.Companion.PRODUCT_TAG
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_catalog.*
 import moxy.ktx.moxyPresenter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class CatalogActivity : BaseActivity(), CatalogView {
+class CatalogActivity : BaseActivity(), CatalogView,
+    BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var catalogAdapter: ProductAdapter
     private lateinit var categoryAdapter: CategoryAdapter
@@ -35,8 +36,7 @@ class CatalogActivity : BaseActivity(), CatalogView {
             .build()
         val service = retrofit.create(MainApi::class.java)
         CatalogPresenter(
-            mainApi = service,
-            viewedProductDao = ViewedProductDaoImpl(sharedPreferences)
+            mainApi = service
         )
     }
 
@@ -60,6 +60,22 @@ class CatalogActivity : BaseActivity(), CatalogView {
             }
                 .also { catalogAdapter = it }
         }
+
+        bottom_navigation.setOnNavigationItemSelectedListener(this)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.catalogBN -> {
+                return true
+            }
+            R.id.cartBN -> {
+                startActivity(Intent(this, CartActivity::class.java))
+                return true
+            }
+        }
+
+        return false
     }
 
     override fun setProducts(list: List<RemoteProduct>) {
@@ -86,7 +102,4 @@ class CatalogActivity : BaseActivity(), CatalogView {
         const val REQUEST_AUTH: Int = 10
         const val IS_USER_AUTH = "IS_USER_AUTH"
     }
-
-    private val AppCompatActivity.sharedPreferences: SharedPreferences
-        get() = getSharedPreferences("data", MODE_PRIVATE)
 }

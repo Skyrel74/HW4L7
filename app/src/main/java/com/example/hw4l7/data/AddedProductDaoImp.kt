@@ -2,20 +2,20 @@ package com.example.hw4l7.data
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.example.hw4l7.domain.ViewedProductDao
-import com.example.hw4l7.domain.model.Cart
+import com.example.hw4l7.domain.AddedProductDao
+import com.example.hw4l7.domain.RemoteProduct
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class ViewedProductDaoImpl(
+class AddedProductDaoImpl(
     private val sharedPreferences: SharedPreferences
-) : ViewedProductDao {
+) : AddedProductDao {
 
-    private var savedProducts: List<Cart>
+    private var savedProducts: List<RemoteProduct>
         get() {
             val historyStr = sharedPreferences.getString(PRODUCT_TAG, null)
             return if (historyStr != null) {
-                Gson().fromJson(historyStr, (object : TypeToken<List<Cart>>() {}).type)
+                Gson().fromJson(historyStr, (object : TypeToken<List<RemoteProduct>>() {}).type)
             } else emptyList()
         }
         set(value) {
@@ -24,17 +24,21 @@ class ViewedProductDaoImpl(
             }
         }
 
-    override fun addProduct(product: Cart) {
-        val products: List<Cart> = savedProducts
-        val newProducts = mutableListOf<Cart>().apply {
+    override fun addProduct(product: RemoteProduct) {
+        val products: List<RemoteProduct> = savedProducts
+        val newProducts = mutableListOf<RemoteProduct>().apply {
             add(product)
             addAll(products.filter { it.id != product.id })
         }
         savedProducts = newProducts
     }
 
-    override fun getAllProducts(): List<Cart> {
+    override fun getAllProducts(): List<RemoteProduct> {
         return savedProducts
+    }
+
+    override fun clearCart() {
+        savedProducts = mutableListOf()
     }
 
     companion object {

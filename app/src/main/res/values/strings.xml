@@ -1,5 +1,11 @@
+<!DOCTYPE resources [<!ENTITY rouble "₽">]>
 <resources>
-    <string name="app_name">Магазин</string>
+    <!-- Global values -->
+    <string name="app_name">Syncopa</string>
+    <string name="rouble">&rouble;</string>
+
+    <string name="price">Цена</string>
+
     <string name="CheckoutHeader">Оформление заказа</string>
     <string name="Price">Цена</string>
     <string name="Discount">Скидка</string>
@@ -25,21 +31,33 @@
     <string name="productName">Name</string>
     <string name="productPrice">Price</string>
     <string name="productDiscount">Discount</string>
+    <string name="productImg">Product Image</string>
 
     <!--Cart-->
-    <string name="btn_buy_cart">Оформить заказ</string>
+    <!-- Header of Cart -->
     <string name="total_price">Итог</string>
     <string name="discount_price">Скидка</string>
     <string name="price_header">Цена</string>
     <string name="title_header">Наименование</string>
-
-    <!-- Detailed -->
-    <string name="product_title">Title</string>
-    <string name="price">Цена</string>
+    <!-- Elements of cell -->
+    <string name="product_title">Название</string>
     <string name="discount_present">Скидка</string>
     <string name="price_with_discount">Итог</string>
+    <string name="btn_buy_cart">Оформить заказ</string>
+
+    <!-- Detailed -->
     <string name="detailed_photo_title">detailed_photo</string>
-    <string name="some_text">someText</string>
-    <string name="productImg">ProductImage</string>
-    <string name="categoryName">Category</string>
+    <string name="productNaming">Название продукта</string>
+    <string name="productDescription">Описание продукта</string>
+    <string name="addToCart">Добавить в корзину</string>
+
+    <!-- Items -->
+    <string name="param">Параметр продукта</string>
+    <string name="categoryName">Категория продукта</string>
+
+    <!-- Bottom Navigation Menu -->
+    <string name="text_label_catalog">Каталог</string>
+    <string name="text_label_cart">Корзина</string>
+    <string name="deleteProduct">DeleteProduct</string>
+
 </resources>
