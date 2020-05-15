@@ -45,7 +45,9 @@ class AddedProductDaoImpl(
     }
 
     override fun remove(product: RemoteProduct) {
-        savedProducts.remove(product)
+        val newCart = savedProducts
+        newCart.remove(product)
+        savedProducts = newCart
     }
 
     override fun size(): Int = savedProducts.size
