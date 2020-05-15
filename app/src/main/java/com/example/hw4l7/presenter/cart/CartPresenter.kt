@@ -4,9 +4,10 @@ import com.example.hw4l7.data.AddedProductDaoImpl
 import com.example.hw4l7.domain.RemoteProduct
 import moxy.InjectViewState
 import moxy.MvpPresenter
+import javax.inject.Inject
 
 @InjectViewState
-class CartPresenter(
+class CartPresenter @Inject constructor(
     private val addedProductDao: AddedProductDaoImpl
 ) : MvpPresenter<CartView>() {
 

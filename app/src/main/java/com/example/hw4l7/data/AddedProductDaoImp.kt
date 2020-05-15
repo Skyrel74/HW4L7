@@ -6,8 +6,9 @@ import com.example.hw4l7.domain.AddedProductDao
 import com.example.hw4l7.domain.RemoteProduct
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import javax.inject.Inject
 
-class AddedProductDaoImpl(
+class AddedProductDaoImpl @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : AddedProductDao {
 

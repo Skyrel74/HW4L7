@@ -6,26 +6,27 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.hw4l7.App
 import com.example.hw4l7.R
-import com.example.hw4l7.data.AddedProductDaoImpl
 import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.presenter.detailed.DetailedPresenter
 import com.example.hw4l7.presenter.detailed.DetailedView
 import com.example.hw4l7.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_detailed.*
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 class DetailedActivity : BaseActivity(), DetailedView {
 
     private lateinit var paramAdapter: ParamAdapter
 
-    private val presenter by moxyPresenter {
-        DetailedPresenter(
-            AddedProductDaoImpl(sharedPreferences)
-        )
-    }
+    @Inject
+    lateinit var detailedPresenter: DetailedPresenter
+
+    private val presenter by moxyPresenter { detailedPresenter }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed)
 

@@ -4,9 +4,10 @@ import com.example.hw4l7.data.AddedProductDaoImpl
 import com.example.hw4l7.domain.model.OrderModel
 import moxy.InjectViewState
 import moxy.MvpPresenter
+import javax.inject.Inject
 
 @InjectViewState
-class CheckoutPresenter(
+class CheckoutPresenter @Inject constructor(
     private val addedProductDao: AddedProductDaoImpl
 ) : MvpPresenter<CheckoutView>() {
 

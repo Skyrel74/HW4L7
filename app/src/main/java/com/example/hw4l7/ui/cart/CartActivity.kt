@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.hw4l7.App
 import com.example.hw4l7.R
-import com.example.hw4l7.data.AddedProductDaoImpl
 import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.presenter.cart.CartPresenter
 import com.example.hw4l7.presenter.cart.CartView
@@ -17,18 +17,20 @@ import com.example.hw4l7.ui.checkout.CheckoutActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_cart.*
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 class CartActivity : BaseActivity(), CartView,
     BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var cardAdapter: CartAdapter
-    private val presenter by moxyPresenter {
-        CartPresenter(
-            AddedProductDaoImpl(sharedPreferences)
-        )
-    }
+
+    @Inject
+    lateinit var cartPresenter: CartPresenter
+
+    private val presenter by moxyPresenter { cartPresenter }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 

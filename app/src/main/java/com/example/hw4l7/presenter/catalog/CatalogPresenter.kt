@@ -7,9 +7,10 @@ import com.example.hw4l7.presenter.BasePresenter
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import java.net.ConnectException
+import javax.inject.Inject
 
 @InjectViewState
-class CatalogPresenter(
+class CatalogPresenter @Inject constructor(
     private val mainApi: MainApi
 ) : BasePresenter<CatalogView>() {
 

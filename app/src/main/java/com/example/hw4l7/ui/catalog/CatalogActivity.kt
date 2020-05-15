@@ -6,9 +6,9 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.hw4l7.App
 import com.example.hw4l7.R
 import com.example.hw4l7.domain.Category
-import com.example.hw4l7.domain.MainApi
 import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.presenter.catalog.CatalogPresenter
 import com.example.hw4l7.presenter.catalog.CatalogView
@@ -19,27 +19,21 @@ import com.example.hw4l7.ui.detailed.DetailedActivity.Companion.PRODUCT_TAG
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_catalog.*
 import moxy.ktx.moxyPresenter
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 class CatalogActivity : BaseActivity(), CatalogView,
     BottomNavigationView.OnNavigationItemSelectedListener {
 
+    @Inject
+    lateinit var catalogPresenter: CatalogPresenter
+
     private lateinit var catalogAdapter: ProductAdapter
     private lateinit var categoryAdapter: CategoryAdapter
 
-    private val presenter by moxyPresenter {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://207.254.71.167:9191")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val service = retrofit.create(MainApi::class.java)
-        CatalogPresenter(
-            mainApi = service
-        )
-    }
+    private val presenter by moxyPresenter { catalogPresenter }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_catalog)
 

@@ -10,8 +10,8 @@ import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.hw4l7.App
 import com.example.hw4l7.R
-import com.example.hw4l7.data.AddedProductDaoImpl
 import com.example.hw4l7.domain.model.Product
 import com.example.hw4l7.presenter.checkout.CheckoutPresenter
 import com.example.hw4l7.presenter.checkout.CheckoutView
@@ -22,19 +22,20 @@ import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.PRODUCT_ID
 import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.REQUEST_AUTH
 import kotlinx.android.synthetic.main.activity_checkout.*
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 import kotlin.math.round
 
 
 class CheckoutActivity : BaseActivity(), CheckoutView {
 
-    private val presenter by moxyPresenter {
-        CheckoutPresenter(
-            AddedProductDaoImpl(sharedPreferences)
-        )
-    }
+    @Inject
+    lateinit var checkoutPresenter: CheckoutPresenter
+
+    private val presenter by moxyPresenter { checkoutPresenter }
     private var isAuth = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
 
