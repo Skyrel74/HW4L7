@@ -34,7 +34,9 @@ class CartActivity : BaseActivity(), CartView,
 
         with(cartProducts) {
             layoutManager = LinearLayoutManager(context)
-            adapter = CartAdapter()
+            adapter = CartAdapter { product ->
+                presenter.deleteProduct(product)
+            }
                 .also { cardAdapter = it }
         }
         btnApply.setOnClickListener {
@@ -57,8 +59,12 @@ class CartActivity : BaseActivity(), CartView,
         return false
     }
 
-    override fun showProducts(products: List<RemoteProduct>) {
+    override fun showProducts(products: MutableList<RemoteProduct>) {
         cardAdapter.changeItemSource(products)
+    }
+
+    override fun removeItem(product: RemoteProduct) {
+        cardAdapter.removeItem(product)
     }
 
     private val AppCompatActivity.sharedPreferences: SharedPreferences

@@ -11,12 +11,15 @@ class AddedProductDaoImpl(
     private val sharedPreferences: SharedPreferences
 ) : AddedProductDao {
 
-    private var savedProducts: List<RemoteProduct>
+    private var savedProducts: MutableList<RemoteProduct>
         get() {
             val historyStr = sharedPreferences.getString(PRODUCT_TAG, null)
             return if (historyStr != null) {
-                Gson().fromJson(historyStr, (object : TypeToken<List<RemoteProduct>>() {}).type)
-            } else emptyList()
+                Gson().fromJson(
+                    historyStr,
+                    (object : TypeToken<MutableList<RemoteProduct>>() {}).type
+                )
+            } else mutableListOf()
         }
         set(value) {
             sharedPreferences.edit {
@@ -25,7 +28,7 @@ class AddedProductDaoImpl(
         }
 
     override fun addProduct(product: RemoteProduct) {
-        val products: List<RemoteProduct> = savedProducts
+        val products: MutableList<RemoteProduct> = savedProducts
         val newProducts = mutableListOf<RemoteProduct>().apply {
             add(product)
             addAll(products.filter { it.id != product.id })
@@ -33,13 +36,19 @@ class AddedProductDaoImpl(
         savedProducts = newProducts
     }
 
-    override fun getAllProducts(): List<RemoteProduct> {
+    override fun getAllProducts(): MutableList<RemoteProduct> {
         return savedProducts
     }
 
     override fun clearCart() {
         savedProducts = mutableListOf()
     }
+
+    override fun remove(product: RemoteProduct) {
+        savedProducts.remove(product)
+    }
+
+    override fun size(): Int = savedProducts.size
 
     companion object {
         private const val PRODUCT_TAG = "PRODUCT_TAG"

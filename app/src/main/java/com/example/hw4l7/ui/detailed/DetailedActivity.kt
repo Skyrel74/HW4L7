@@ -2,6 +2,7 @@ package com.example.hw4l7.ui.detailed
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -28,6 +29,10 @@ class DetailedActivity : BaseActivity(), DetailedView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed)
 
+        setSupportActionBar(detailedToolbar)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val product = intent?.getParcelableExtra<RemoteProduct>(PRODUCT_TAG) ?: return
         Glide
             .with(ivDetailedImage.context)
@@ -52,6 +57,12 @@ class DetailedActivity : BaseActivity(), DetailedView {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home)
+            finish()
+        return true
     }
 
     companion object {

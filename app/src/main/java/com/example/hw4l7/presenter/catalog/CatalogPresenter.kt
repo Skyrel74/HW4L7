@@ -13,10 +13,8 @@ class CatalogPresenter(
     private val mainApi: MainApi
 ) : BasePresenter<CatalogView>() {
 
-    private val list = mutableListOf<RemoteProduct>()
-
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
+    override fun attachView(view: CatalogView?) {
+        super.attachView(view)
         launch {
             val products = mainApi.allProducts(author = "Rakipov")
             viewState.setCategories(products)

@@ -10,9 +10,11 @@ import com.example.hw4l7.domain.RemoteProduct
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.cart_item.*
 
-class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CartAdapter(
+    private val onDeleteClick: (product: RemoteProduct) -> Unit
+) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
-    private var dataSet: List<RemoteProduct> = listOf()
+    private var dataSet: MutableList<RemoteProduct> = mutableListOf()
 
     inner class ViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView),
@@ -23,6 +25,9 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
             tvCartItemPrice.text = product.price.toString()
             tvCartItemDiscount.text = "${product.discountPercent} %"
             tvCartItemDiscountPrice.text = product.calcDiscountPrice().toString()
+            deleteProduct.setOnClickListener {
+                onDeleteClick(product)
+            }
         }
     }
 
@@ -37,8 +42,14 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = dataSet.size
 
-    fun changeItemSource(products: List<RemoteProduct>) {
+    fun changeItemSource(products: MutableList<RemoteProduct>) {
         dataSet = products
         notifyDataSetChanged()
+    }
+
+    fun removeItem(product: RemoteProduct) {
+        val position = dataSet.indexOf(product)
+        dataSet.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

@@ -17,4 +17,14 @@ interface AddedProductDao {
      * Clear list of products after buying
      */
     fun clearCart()
+
+    /**
+     * Remover product from cart by position
+     */
+    fun remove(product: RemoteProduct)
+
+    /**
+     * Getter of size
+     */
+    fun size(): Int
 }
