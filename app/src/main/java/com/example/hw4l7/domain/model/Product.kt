@@ -8,11 +8,11 @@ class Product internal constructor(
     /**
      * [price] must be positive
      */
-    val price: Double,
+    private val price: Double,
     /**
      * [salePercent] must between 0 and 100
      */
-    val salePercent: Int,
+    private val salePercent: Int,
     val name: String
 ) : Parcelable {
     fun calcDiscountPrice(): Double {

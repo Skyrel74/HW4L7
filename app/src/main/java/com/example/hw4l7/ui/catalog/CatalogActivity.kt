@@ -22,7 +22,6 @@ import moxy.ktx.moxyPresenter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 class CatalogActivity : BaseActivity(), CatalogView,
     BottomNavigationView.OnNavigationItemSelectedListener {
 

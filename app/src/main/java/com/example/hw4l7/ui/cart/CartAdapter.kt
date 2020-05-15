@@ -49,7 +49,8 @@ class CartAdapter(
 
     fun removeItem(product: RemoteProduct) {
         val position = dataSet.indexOf(product)
-        dataSet.removeAt(position)
+        if (position != -1)
+            dataSet.removeAt(position)
         notifyItemRemoved(position)
     }
 }
