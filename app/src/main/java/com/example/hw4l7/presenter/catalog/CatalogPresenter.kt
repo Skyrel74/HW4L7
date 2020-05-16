@@ -4,6 +4,7 @@ import com.example.hw4l7.domain.Category
 import com.example.hw4l7.domain.MainApi
 import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.presenter.BasePresenter
+import com.example.hw4l7.ui.catalog.CatalogView
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import java.net.ConnectException
@@ -29,11 +30,7 @@ class CatalogPresenter @Inject constructor(
             viewState.showInternetError()
     }
 
-    fun onProductClick(product: RemoteProduct) {
-        viewState.showProductDetailed(product)
-    }
+    fun onProductClick(product: RemoteProduct) = viewState.showProductDetailed(product)
 
-    fun onCategoryClick(category: Category) {
-        viewState.setProducts(category.products)
-    }
+    fun onCategoryClick(category: Category) = viewState.setProducts(category.products)
 }

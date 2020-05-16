@@ -24,8 +24,6 @@ class CategoryAdapter(
         LayoutInflater.from(parent.context).inflate(R.layout.category_item, parent, false)
     )
 
-    override fun getItemCount(): Int = categories.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(categories[position])
     }
@@ -38,4 +36,6 @@ class CategoryAdapter(
             containerView.setOnClickListener { onCategoryClick(category) }
         }
     }
+
+    override fun getItemCount(): Int = categories.size
 }

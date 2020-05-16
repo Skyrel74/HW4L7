@@ -4,12 +4,8 @@
     <string name="app_name">Syncopa</string>
     <string name="rouble">&rouble;</string>
 
-    <string name="price">Цена</string>
-
+    <!-- Checkout -->
     <string name="CheckoutHeader">Оформление заказа</string>
-    <string name="Price">Цена</string>
-    <string name="Discount">Скидка</string>
-    <string name="Result">Итого</string>
     <string name="Name">Имя</string>
     <string name="Surname">Фамилия</string>
     <string name="MiddleName">Отчество</string>
@@ -19,18 +15,11 @@
     <string name="Card">Картой при получении</string>
     <string name="Pay">Оплатить</string>
     <string name="PhoneHint">Пример, 89999999999 или +79999999999</string>
-    <string name="catalogHeader">Католог</string>
-    <string name="catalogCheckoutBtn">Оформить заказ</string>
-    <string name="catalogProductInfoBtn">Товар</string>
-    <string name="catalogCartBtn">Корзина</string>
-    <string name="cartHeader">Корзина продуктов</string>
-    <string name="productHeader">Продукт</string>
-    <string name="backbtn">backBtn</string>
 
     <!-- Catalog -->
-    <string name="productName">Name</string>
-    <string name="productPrice">Price</string>
-    <string name="productDiscount">Discount</string>
+    <string name="catalogHeader">Католог</string>
+    <!-- Catalog Items -->
+    <string name="categoryName">Категория продукта</string>
     <string name="productImg">Product Image</string>
 
     <!--Cart-->
@@ -39,25 +28,24 @@
     <string name="discount_price">Скидка</string>
     <string name="price_header">Цена</string>
     <string name="title_header">Наименование</string>
-    <!-- Elements of cell -->
+    <!-- Cart Items -->
     <string name="product_title">Название</string>
     <string name="discount_present">Скидка</string>
     <string name="price_with_discount">Итог</string>
     <string name="btn_buy_cart">Оформить заказ</string>
+    <string name="deleteProduct">DeleteProduct</string>
 
     <!-- Detailed -->
     <string name="detailed_photo_title">detailed_photo</string>
     <string name="productNaming">Название продукта</string>
     <string name="productDescription">Описание продукта</string>
     <string name="addToCart">Добавить в корзину</string>
-
-    <!-- Items -->
+    <string name="price">Цена</string>
+    <!-- Detailed Items -->
     <string name="param">Параметр продукта</string>
-    <string name="categoryName">Категория продукта</string>
 
     <!-- Bottom Navigation Menu -->
     <string name="text_label_catalog">Каталог</string>
     <string name="text_label_cart">Корзина</string>
-    <string name="deleteProduct">DeleteProduct</string>
 
 </resources>

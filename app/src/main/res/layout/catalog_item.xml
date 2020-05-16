@@ -30,7 +30,7 @@
             android:layout_marginTop="15dp"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="Title Text"
+            android:text="@string/productNaming"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 

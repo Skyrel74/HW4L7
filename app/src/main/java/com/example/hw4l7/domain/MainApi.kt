@@ -41,5 +41,4 @@ interface MainApi {
 
     @GET("products/allWithCategories/{author}/")
     suspend fun allProducts(@Path("author") author: String): List<Category>
-
 }

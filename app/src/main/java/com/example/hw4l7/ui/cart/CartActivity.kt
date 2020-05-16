@@ -1,16 +1,13 @@
 package com.example.hw4l7.ui.cart
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hw4l7.App
 import com.example.hw4l7.R
 import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.presenter.cart.CartPresenter
-import com.example.hw4l7.presenter.cart.CartView
 import com.example.hw4l7.ui.BaseActivity
 import com.example.hw4l7.ui.catalog.CatalogActivity
 import com.example.hw4l7.ui.checkout.CheckoutActivity
@@ -22,12 +19,12 @@ import javax.inject.Inject
 class CartActivity : BaseActivity(), CartView,
     BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var cardAdapter: CartAdapter
-
     @Inject
     lateinit var cartPresenter: CartPresenter
 
     private val presenter by moxyPresenter { cartPresenter }
+
+    private lateinit var cardAdapter: CartAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.appComponent.inject(this)
@@ -41,6 +38,7 @@ class CartActivity : BaseActivity(), CartView,
             }
                 .also { cardAdapter = it }
         }
+
         btnApply.setOnClickListener {
             startActivity(Intent(this, CheckoutActivity::class.java))
         }
@@ -68,7 +66,4 @@ class CartActivity : BaseActivity(), CartView,
     override fun removeItem(product: RemoteProduct) {
         cardAdapter.removeItem(product)
     }
-
-    private val AppCompatActivity.sharedPreferences: SharedPreferences
-        get() = getSharedPreferences("data", MODE_PRIVATE)
 }

@@ -16,6 +16,15 @@ class CartAdapter(
 
     private var dataSet: MutableList<RemoteProduct> = mutableListOf()
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layout = LayoutInflater.from(parent.context)
+            .inflate(R.layout.cart_item, parent, false) as ConstraintLayout
+        return ViewHolder(layout)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
+        holder.bind(dataSet[position])
+
     inner class ViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView),
         LayoutContainer {
@@ -30,15 +39,6 @@ class CartAdapter(
             }
         }
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.cart_item, parent, false) as ConstraintLayout
-        return ViewHolder(layout)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-        holder.bind(dataSet[position])
 
     override fun getItemCount(): Int = dataSet.size
 

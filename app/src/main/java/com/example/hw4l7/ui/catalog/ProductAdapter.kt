@@ -17,8 +17,9 @@ class ProductAdapter(
     private val onProductClick: (RemoteProduct) -> Unit
 ) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
-    private var categories: List<RemoteProduct> = listOf()
     lateinit var context: Context
+
+    private var categories: List<RemoteProduct> = listOf()
 
     fun setData(categories: List<RemoteProduct>) {
         this.categories = categories
@@ -31,8 +32,6 @@ class ProductAdapter(
             LayoutInflater.from(context).inflate(R.layout.catalog_item, parent, false)
         )
     }
-
-    override fun getItemCount(): Int = categories.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(categories[position])
@@ -48,6 +47,7 @@ class ProductAdapter(
         }
     }
 
+    override fun getItemCount(): Int = categories.size
 }
 
 class CharacterItemDecoration(

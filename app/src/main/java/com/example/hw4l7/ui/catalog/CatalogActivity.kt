@@ -11,7 +11,6 @@ import com.example.hw4l7.R
 import com.example.hw4l7.domain.Category
 import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.presenter.catalog.CatalogPresenter
-import com.example.hw4l7.presenter.catalog.CatalogView
 import com.example.hw4l7.ui.BaseActivity
 import com.example.hw4l7.ui.cart.CartActivity
 import com.example.hw4l7.ui.detailed.DetailedActivity
@@ -37,7 +36,7 @@ class CatalogActivity : BaseActivity(), CatalogView,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_catalog)
 
-        with(categoryRV) {
+        with(categoryRv) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = CategoryAdapter {
                 presenter.onCategoryClick(it)
@@ -71,28 +70,16 @@ class CatalogActivity : BaseActivity(), CatalogView,
         return false
     }
 
-    override fun setProducts(list: List<RemoteProduct>) {
-        catalogAdapter.setData(list)
-    }
+    override fun setProducts(list: List<RemoteProduct>) = catalogAdapter.setData(list)
 
-    override fun setCategories(list: List<Category>) {
-        categoryAdapter.setData(list)
-    }
+    override fun setCategories(list: List<Category>) = categoryAdapter.setData(list)
 
-
-    override fun showInternetError() {
+    override fun showInternetError() =
         Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show()
-    }
 
     override fun showProductDetailed(product: RemoteProduct) {
         startActivity(Intent(this, DetailedActivity::class.java).apply {
             putExtra(PRODUCT_TAG, product)
         })
-    }
-
-    companion object {
-        const val PRODUCT_ID = "PRODUCT_ID"
-        const val REQUEST_AUTH: Int = 10
-        const val IS_USER_AUTH = "IS_USER_AUTH"
     }
 }

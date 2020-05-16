@@ -2,6 +2,7 @@ package com.example.hw4l7.presenter.checkout
 
 import com.example.hw4l7.data.AddedProductDaoImpl
 import com.example.hw4l7.domain.model.OrderModel
+import com.example.hw4l7.ui.checkout.CheckoutView
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import javax.inject.Inject
@@ -22,22 +23,26 @@ class CheckoutPresenter @Inject constructor(
     }
 
     fun checkFirstName(name: String) {
-        if (!checkSymbols(name)) model.firstName
+        if (!checkSymbols(name))
+            model.firstName = name
         viewState.showErrorForName(checkSymbols(name))
     }
 
     fun checkSurname(surname: String) {
-        if (!checkSymbols(surname)) model.surname
+        if (!checkSymbols(surname))
+            model.surname = surname
         viewState.showErrorForSurname(checkSymbols(surname))
     }
 
     fun checkSecondName(secondName: String) {
-        if (!checkSymbols(secondName)) model.secondName
+        if (!checkSymbols(secondName))
+            model.secondName = secondName
         viewState.showErrorForSecondName(checkSymbols(secondName))
     }
 
     fun checkPhone(phone: String) {
-        if (!checkNumbers(phone)) model.phone
+        if (!checkNumbers(phone))
+            model.phone = phone
         viewState.showErrorForPhone(checkNumbers(phone))
     }
 

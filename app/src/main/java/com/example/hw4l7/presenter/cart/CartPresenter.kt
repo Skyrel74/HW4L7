@@ -2,6 +2,7 @@ package com.example.hw4l7.presenter.cart
 
 import com.example.hw4l7.data.AddedProductDaoImpl
 import com.example.hw4l7.domain.RemoteProduct
+import com.example.hw4l7.ui.cart.CartView
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import javax.inject.Inject

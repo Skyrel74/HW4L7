@@ -1,29 +1,27 @@
 package com.example.hw4l7.ui.detailed
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.hw4l7.App
 import com.example.hw4l7.R
 import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.presenter.detailed.DetailedPresenter
-import com.example.hw4l7.presenter.detailed.DetailedView
 import com.example.hw4l7.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_detailed.*
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
-class DetailedActivity : BaseActivity(), DetailedView {
-
-    private lateinit var paramAdapter: ParamAdapter
+class DetailedActivity : BaseActivity(),
+    DetailedView {
 
     @Inject
     lateinit var detailedPresenter: DetailedPresenter
 
     private val presenter by moxyPresenter { detailedPresenter }
+
+    private lateinit var paramAdapter: ParamAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.appComponent.inject(this)
@@ -36,10 +34,10 @@ class DetailedActivity : BaseActivity(), DetailedView {
 
         val product = intent?.getParcelableExtra<RemoteProduct>(PRODUCT_TAG) ?: return
         Glide
-            .with(ivDetailedImage.context)
+            .with(DetailedIv.context)
             .load(product.imageUrl)
             .error(R.mipmap.ic_launcher)
-            .into(ivDetailedImage)
+            .into(DetailedIv)
         tvDetailedTitle.text = product.name
         tvDetailedPrice.text =
             product.calcDiscountPrice().toString() + resources.getString(R.string.rouble)
@@ -69,9 +67,6 @@ class DetailedActivity : BaseActivity(), DetailedView {
     companion object {
         const val PRODUCT_TAG = "PRODUCT_TAG"
     }
-
-    private val AppCompatActivity.sharedPreferences: SharedPreferences
-        get() = getSharedPreferences("data", MODE_PRIVATE)
 
     override fun setParams(list: List<RemoteProduct.Attribute>) {
         paramAdapter.setData(list)

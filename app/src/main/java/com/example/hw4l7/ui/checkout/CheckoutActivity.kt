@@ -1,38 +1,29 @@
 package com.example.hw4l7.ui.checkout
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.hw4l7.App
 import com.example.hw4l7.R
-import com.example.hw4l7.domain.model.Product
 import com.example.hw4l7.presenter.checkout.CheckoutPresenter
-import com.example.hw4l7.presenter.checkout.CheckoutView
 import com.example.hw4l7.ui.BaseActivity
 import com.example.hw4l7.ui.catalog.CatalogActivity
-import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.IS_USER_AUTH
-import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.PRODUCT_ID
-import com.example.hw4l7.ui.catalog.CatalogActivity.Companion.REQUEST_AUTH
 import kotlinx.android.synthetic.main.activity_checkout.*
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
-import kotlin.math.round
 
 
-class CheckoutActivity : BaseActivity(), CheckoutView {
+class CheckoutActivity : BaseActivity(),
+    CheckoutView {
 
     @Inject
     lateinit var checkoutPresenter: CheckoutPresenter
 
     private val presenter by moxyPresenter { checkoutPresenter }
-    private var isAuth = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.appComponent.inject(this)
@@ -43,20 +34,18 @@ class CheckoutActivity : BaseActivity(), CheckoutView {
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val productId: Int? = intent.extras?.getInt(PRODUCT_ID, -1)
-        Log.d(tag, productId.toString())
-
         setListeners()
 
         PayButton.setOnClickListener {
-            isAuth = true
-            setResult(REQUEST_AUTH, Intent().apply {
-                putExtra(IS_USER_AUTH, isAuth)
-            })
             presenter.clearCart()
             Toast.makeText(this, "Покупка успешна", Toast.LENGTH_LONG).show()
             startActivity(Intent(this, CatalogActivity::class.java))
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -67,36 +56,28 @@ class CheckoutActivity : BaseActivity(), CheckoutView {
 
     private fun setListeners() {
         FirstName.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                presenter.checkFirstName(s.toString())
-            }
+            override fun afterTextChanged(s: Editable?) = presenter.checkFirstName(s.toString())
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
         Surname.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                presenter.checkSurname(s.toString())
-            }
+            override fun afterTextChanged(s: Editable?) = presenter.checkSurname(s.toString())
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
         SecondName.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                presenter.checkSecondName(s.toString())
-            }
+            override fun afterTextChanged(s: Editable?) = presenter.checkSecondName(s.toString())
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
         Phone.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                presenter.checkPhone(s.toString())
-            }
+            override fun afterTextChanged(s: Editable?) = presenter.checkPhone(s.toString())
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -116,21 +97,4 @@ class CheckoutActivity : BaseActivity(), CheckoutView {
     override fun showErrorForSecondName(isVisible: Boolean) = SecondName.showError(isVisible)
 
     override fun showErrorForPhone(isVisible: Boolean) = Phone.showError(isVisible)
-
-    private fun formatPrice(price: Double): String =
-        if (price - price.toInt() == 0.0) "${price.toInt()}"
-        else "${round(price * 100) / 100}"
-
-    override fun print(price: Double) {
-        Log.d("App Output", "${formatPrice(price)}P")
-    }
-
-    override fun print(products: List<Product>) {}
-
-    override fun print(name: String, price: Double) {
-        Log.d("App Output", "$name: ${formatPrice(price)}P")
-    }
-
-    private val AppCompatActivity.sharedPreferences: SharedPreferences
-        get() = getSharedPreferences("data", MODE_PRIVATE)
 }

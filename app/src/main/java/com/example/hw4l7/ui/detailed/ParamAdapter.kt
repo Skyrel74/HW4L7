@@ -22,8 +22,6 @@ class ParamAdapter : RecyclerView.Adapter<ParamAdapter.ViewHolder>() {
         LayoutInflater.from(parent.context).inflate(R.layout.param_item, parent, false)
     )
 
-    override fun getItemCount(): Int = params.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(params[position])
     }
@@ -35,4 +33,6 @@ class ParamAdapter : RecyclerView.Adapter<ParamAdapter.ViewHolder>() {
             paramTv.text = param.name + ": " + param.value
         }
     }
+
+    override fun getItemCount(): Int = params.size
 }

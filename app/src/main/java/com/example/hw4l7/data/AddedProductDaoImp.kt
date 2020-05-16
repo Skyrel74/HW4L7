@@ -37,9 +37,7 @@ class AddedProductDaoImpl @Inject constructor(
         savedProducts = newProducts
     }
 
-    override fun getAllProducts(): MutableList<RemoteProduct> {
-        return savedProducts
-    }
+    override fun getAllProducts(): MutableList<RemoteProduct> = savedProducts
 
     override fun clearCart() {
         savedProducts = mutableListOf()
@@ -50,8 +48,6 @@ class AddedProductDaoImpl @Inject constructor(
         newCart.remove(product)
         savedProducts = newCart
     }
-
-    override fun size(): Int = savedProducts.size
 
     companion object {
         private const val PRODUCT_TAG = "PRODUCT_TAG"
