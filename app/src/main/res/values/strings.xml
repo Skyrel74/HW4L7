@@ -1,7 +1,7 @@
 <!DOCTYPE resources [<!ENTITY rouble "₽">]>
 <resources>
     <!-- Global values -->
-    <string name="app_name">Syncopa</string>
+    <string name="app_name">Pawnshop</string>
     <string name="rouble">&rouble;</string>
 
     <!-- Checkout -->

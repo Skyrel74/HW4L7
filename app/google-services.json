@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "594822582733",
+    "firebase_url": "https://pawnshop-5b86b.firebaseio.com",
+    "project_id": "pawnshop-5b86b",
+    "storage_bucket": "pawnshop-5b86b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594822582733:android:a3ebb5931191416fc4b484",
+        "android_client_info": {
+          "package_name": "com.example.hw4l7"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594822582733-0l713qc1qc1k60qrrceusm4u7dndjau7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hw4l7",
+            "certificate_hash": "4584760faa478dcbeeb51d5dffbd3aa3e6acfba5"
+          }
+        },
+        {
+          "client_id": "594822582733-q33vfl1faub0jt1o8sohvnr6a31llo10.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMQT-sBUsRYQtGWGMmIvG5JyAEvOZDNm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594822582733-q33vfl1faub0jt1o8sohvnr6a31llo10.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
