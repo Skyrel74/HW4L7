@@ -10,8 +10,8 @@ import com.example.hw4l7.ui.BaseActivity
 import com.example.hw4l7.ui.catalog.CatalogActivity
 import com.example.hw4l7.ui.signup.SignUpActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_auth.*
+import kotlinx.android.synthetic.main.activity_signup.*
 import moxy.ktx.moxyPresenter
 
 class AuthActivity : BaseActivity(), AuthView {
@@ -20,15 +20,20 @@ class AuthActivity : BaseActivity(), AuthView {
 
     private val presenter by moxyPresenter { AuthPresenter() }
 
+    // TODO(Implement Log out)
+//    public override fun onStart() {
+//        super.onStart()
+//        val currentUser = auth.currentUser
+//        updateUI(currentUser)
+//    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_auth)
         auth = FirebaseAuth.getInstance()
 
         LogInButton.setOnClickListener {
-            startActivity(Intent(this, CatalogActivity::class.java))
-            finish()
+            presenter.doLogin()
         }
 
         SignUp.setOnClickListener {
@@ -37,59 +42,50 @@ class AuthActivity : BaseActivity(), AuthView {
         }
     }
 
-    private fun doLogin() {
-        if (Email.text.toString().isEmpty()) {
-            Email.error = "Please enter email"
-            Email.requestFocus()
+    override fun checkForm() {
+        val email = SignUpEmail.text.toString()
+        val password = SignUpPassword.text.toString()
+
+        if (email.isEmpty()) {
+            EmailAuth.error = "Please enter email"
+            EmailAuth.requestFocus()
             return
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(Email.text.toString()).matches()) {
-            Email.error = "Please enter valid email"
-            Email.requestFocus()
+        if (!Patterns.EMAIL_ADDRESS.matcher(EmailAuth.text.toString()).matches()) {
+            EmailAuth.error = "Please enter valid email"
+            EmailAuth.requestFocus()
             return
         }
 
-        if (Password.text.toString().isEmpty()) {
-            Password.error = "Please enter password"
-            Password.requestFocus()
+        if (PasswordAuth.text.toString().isEmpty()) {
+            PasswordAuth.error = "Please enter password"
+            PasswordAuth.requestFocus()
             return
         }
 
-        auth.signInWithEmailAndPassword(Email.text.toString(), Password.text.toString())
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-
-                    updateUI(null)
-                }
-            }
+        if (password.length < 6) {
+            SignUpPassword.error = "Password must be at least 6 characters"
+            SignUpPassword.requestFocus()
+            return
+        }
+        presenter.logIn(SignUpEmail.text.toString(), SignUpPassword.text.toString())
     }
 
-    public override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
-    }
+    override fun showLogInError() =
+        Toast.makeText(
+            this, "Log In failed. Try again after some time.",
+            Toast.LENGTH_SHORT
+        ).show()
 
-    override fun updateUI(currentUser: FirebaseUser?) {
-        if (currentUser != null) {
-            if (currentUser.isEmailVerified) {
-                startActivity(Intent(this, CatalogActivity::class.java))
-                finish()
-            } else {
-                Toast.makeText(
-                    baseContext, "Please verify your email address.",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        } else {
-            Toast.makeText(
-                baseContext, "Login failed.",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+    override fun moveToCatalog() {
+        startActivity(
+            Intent(this, CatalogActivity::class.java)
+                .addFlags(
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                            Intent.FLAG_ACTIVITY_NEW_TASK
+                )
+        )
+        finish()
     }
 }

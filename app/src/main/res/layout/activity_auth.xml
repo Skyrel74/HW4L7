@@ -17,46 +17,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Вход"
+        android:text="@string/LogInHeader"
         android:textColor="@android:color/black"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/Email"
+        app:layout_constraintBottom_toTopOf="@+id/EmailAuth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/Email"
+        android:id="@+id/EmailAuth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:autoLink="email"
         android:autofillHints=""
         android:ems="10"
-        android:hint="example@mail.com"
+        android:hint="@string/EmailExample"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/Password"
+        app:layout_constraintBottom_toTopOf="@+id/PasswordAuth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Log_In" />
 
     <EditText
-        android:id="@+id/Password"
+        android:id="@+id/PasswordAuth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="Пароль"
+        android:hint="@string/Password"
         android:inputType="textPersonName|textPassword"
-        android:password="true"
-        app:layout_constraintBottom_toTopOf="@+id/PayChose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Email" />
+        app:layout_constraintTop_toBottomOf="@+id/EmailAuth" />
 
     <TextView
         android:id="@+id/SignUp"
@@ -64,13 +62,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Регистрация"
+        android:text="@string/SignUpBtn"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/PayButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Password" />
+        app:layout_constraintTop_toBottomOf="@+id/PasswordAuth" />
 
     <Button
         android:id="@+id/LogInButton"
@@ -79,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginBottom="24dp"
-        android:text="Войти"
+        android:text="@string/LogInBtn"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

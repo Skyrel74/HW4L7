@@ -48,4 +48,22 @@
     <string name="text_label_catalog">Каталог</string>
     <string name="text_label_cart">Корзина</string>
 
+    <!-- Add Product -->
+    <string name="AddImageText">Добавьте изображение</string>
+    <string name="ImageViewDescription">Clickable image to add photo to product</string>
+    <string name="AddNameText">Добавьте наименование товара</string>
+    <string name="AddNameHint">Лопата</string>
+    <string name="AddPriceText">Добавьте цену</string>
+    <string name="AddPriceHint">1000</string>
+    <string name="AddProductSend">Отправить</string>
+
+    <!-- Sign Up and Log In -->
+    <string name="SignUpHeader">Регистрация</string>
+    <string name="SignUpButton">Зарегистрироваться</string>
+    <string name="EmailExample">example@mail.com</string>
+    <string name="Password">Пароль</string>
+    <string name="LogInHeader">Вход</string>
+    <string name="SignUpBtn">Регистрация</string>
+    <string name="LogInBtn">Войти</string>
+
 </resources>

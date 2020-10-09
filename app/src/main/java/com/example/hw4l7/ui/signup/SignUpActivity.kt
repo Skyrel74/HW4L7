@@ -8,66 +8,66 @@ import com.example.hw4l7.R
 import com.example.hw4l7.presenter.signup.SignUpPresenter
 import com.example.hw4l7.ui.BaseActivity
 import com.example.hw4l7.ui.auth.AuthActivity
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_signup.*
 import moxy.ktx.moxyPresenter
 
 class SignUpActivity : BaseActivity(), SignUpView {
-
-    private lateinit var auth: FirebaseAuth
 
     private val presenter by moxyPresenter { SignUpPresenter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
-        auth = FirebaseAuth.getInstance()
 
         SignUpButton.setOnClickListener {
-            signUpUser()
+            presenter.signUpUser()
         }
-
     }
 
-    private fun signUpUser() {
-        if (SignUpEmail.text.toString().isEmpty()) {
+    override fun checkForm() {
+        val email = SignUpEmail.text.toString()
+        val password = SignUpPassword.text.toString()
+
+        if (email.isEmpty()) {
             SignUpEmail.error = "Please enter email"
             SignUpEmail.requestFocus()
             return
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(SignUpEmail.text.toString()).matches()) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             SignUpEmail.error = "Please enter valid email"
             SignUpEmail.requestFocus()
             return
         }
 
-        if (SignUpPassword.text.toString().isEmpty()) {
+        if (password.isEmpty()) {
             SignUpPassword.error = "Please enter password"
             SignUpPassword.requestFocus()
             return
         }
 
-        auth.createUserWithEmailAndPassword(
-            SignUpEmail.text.toString(),
-            SignUpPassword.text.toString()
+        if (password.length < 6) {
+            SignUpPassword.error = "Password must be at least 6 characters"
+            SignUpPassword.requestFocus()
+            return
+        }
+        presenter.createAccount(SignUpEmail.text.toString(), SignUpPassword.text.toString())
+    }
+
+    override fun showSignUpError() =
+        Toast.makeText(
+            this, "Sign Up failed. Try again after some time.",
+            Toast.LENGTH_SHORT
+        ).show()
+
+    override fun finishSignUp() {
+        startActivity(
+            Intent(this, AuthActivity::class.java)
+                .addFlags(
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                            Intent.FLAG_ACTIVITY_NEW_TASK
+                )
         )
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    user?.sendEmailVerification()
-                        ?.addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                startActivity(Intent(this, AuthActivity::class.java))
-                                finish()
-                            }
-                        }
-                } else {
-                    Toast.makeText(
-                        baseContext, "Sign Up failed. Try again after some time.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
+        finish()
     }
 }

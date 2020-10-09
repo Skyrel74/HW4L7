@@ -2,7 +2,6 @@ package com.example.hw4l7.ui.catalog
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,16 +12,11 @@ import com.example.hw4l7.domain.Category
 import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.presenter.catalog.CatalogPresenter
 import com.example.hw4l7.ui.BaseActivity
+import com.example.hw4l7.ui.addproduct.AddProductActivity
 import com.example.hw4l7.ui.cart.CartActivity
 import com.example.hw4l7.ui.detailed.DetailedActivity
 import com.example.hw4l7.ui.detailed.DetailedActivity.Companion.PRODUCT_TAG
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_catalog.*
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -43,25 +37,9 @@ class CatalogActivity : BaseActivity(), CatalogView,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_catalog)
 
-        val database = Firebase.database
-        val myRef = database.getReference("message")
-
-        myRef.setValue("Hello, World!")
-
-        // Read from the database
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                val value = dataSnapshot.getValue<String>()
-                Log.d("test", "Value is: $value")
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w("test", "Failed to read value.", error.toException())
-            }
-        })
+        addProductBtn.setOnClickListener {
+            startActivity(Intent(this, AddProductActivity::class.java))
+        }
 
         with(categoryRv) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

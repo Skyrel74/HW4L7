@@ -1,19 +1,20 @@
-package com.example.hw4l7.ui.signup
+package com.example.hw4l7.ui.addproduct
 
+import android.graphics.Bitmap
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.SkipStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface SignUpView : MvpView {
+interface AddProductView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun checkForm()
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showSignUpError()
+    fun showFillError()
 
     @StateStrategyType(SkipStrategy::class)
-    fun finishSignUp()
+    fun addProduct(name: String, price: Double, img: Bitmap)
+
+    @StateStrategyType(SkipStrategy::class)
+    fun successfulAdded()
 }

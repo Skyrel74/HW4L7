@@ -26,6 +26,7 @@
         <activity android:name=".ui.catalog.CatalogActivity" />
         <activity android:name=".ui.cart.CartActivity" />
         <activity android:name=".ui.detailed.DetailedActivity" />
+        <activity android:name=".ui.addproduct.AddProductActivity" />
     </application>
 
 </manifest>
