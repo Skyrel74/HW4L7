@@ -23,52 +23,22 @@
         android:id="@+id/tvCartItemPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:text="@string/price"
         android:textColor="@android:color/black"
-        app:layout_constraintEnd_toStartOf="@+id/tvCartItemDiscount"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tvCartItemTitle"
-        app:layout_constraintTop_toTopOf="@+id/tvCartItemTitle" />
-
-    <TextView
-        android:id="@+id/tvCartItemDiscount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:text="@string/discount_present"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toStartOf="@+id/tvCartItemDiscountPrice"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tvCartItemPrice"
-        app:layout_constraintTop_toTopOf="@+id/tvCartItemPrice" />
-
-    <TextView
-        android:id="@+id/tvCartItemDiscountPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="@string/price_with_discount"
-        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/deleteProduct"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tvCartItemDiscount"
-        app:layout_constraintTop_toTopOf="@+id/tvCartItemDiscount" />
+        app:layout_constraintStart_toEndOf="@+id/tvCartItemTitle"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/deleteProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:contentDescription="@string/deleteProduct"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tvCartItemDiscountPrice"
-        app:layout_constraintTop_toTopOf="@+id/tvCartItemDiscountPrice"
+        app:layout_constraintStart_toEndOf="@+id/tvCartItemPrice"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_cancel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

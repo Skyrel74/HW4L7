@@ -1,7 +1,6 @@
 package com.example.hw4l7.presenter.addproduct
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.util.Base64
 import android.util.Log
@@ -48,13 +47,6 @@ class AddProductPresenter @javax.inject.Inject constructor() : BasePresenter<Add
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
         val b = byteArrayOutputStream.toByteArray()
         return Base64.encodeToString(b, Base64.DEFAULT)
-    }
-
-    // TODO(Использовать парсер stringToBitMap)
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun stringToBitMap(string: String): Bitmap {
-        val imageBytes = Base64.decode(string, 0)
-        return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
     }
 
     override fun onFailure(e: Throwable) {

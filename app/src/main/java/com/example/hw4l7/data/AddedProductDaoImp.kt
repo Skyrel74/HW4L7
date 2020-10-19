@@ -32,7 +32,7 @@ class AddedProductDaoImpl @Inject constructor(
         val products: MutableList<RemoteProduct> = savedProducts
         val newProducts = mutableListOf<RemoteProduct>().apply {
             add(product)
-            addAll(products.filter { it.id != product.id })
+            addAll(products.filter { it.uid != product.uid })
         }
         savedProducts = newProducts
     }

@@ -2,8 +2,10 @@ package com.example.hw4l7.domain.model
 
 import android.graphics.Bitmap
 import android.os.Parcelable
+import com.google.firebase.database.IgnoreExtraProperties
 import kotlinx.android.parcel.Parcelize
 
+@IgnoreExtraProperties
 @Parcelize
 class Product internal constructor(
     /**

@@ -13,6 +13,7 @@ import com.example.hw4l7.domain.RemoteProduct
 import com.example.hw4l7.presenter.catalog.CatalogPresenter
 import com.example.hw4l7.ui.BaseActivity
 import com.example.hw4l7.ui.addproduct.AddProductActivity
+import com.example.hw4l7.ui.auth.AuthActivity
 import com.example.hw4l7.ui.cart.CartActivity
 import com.example.hw4l7.ui.detailed.DetailedActivity
 import com.example.hw4l7.ui.detailed.DetailedActivity.Companion.PRODUCT_TAG
@@ -58,7 +59,15 @@ class CatalogActivity : BaseActivity(), CatalogView,
                 .also { catalogAdapter = it }
         }
 
+        logoutImgBtn.setOnClickListener {
+            presenter.logout()
+        }
         bottom_navigation.setOnNavigationItemSelectedListener(this)
+    }
+
+    override fun logout() {
+        startActivity(Intent(this, AuthActivity::class.java))
+        finish()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -71,7 +80,6 @@ class CatalogActivity : BaseActivity(), CatalogView,
                 return true
             }
         }
-
         return false
     }
 

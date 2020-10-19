@@ -30,4 +30,7 @@ interface CatalogView : MvpView {
      */
     @StateStrategyType(SkipStrategy::class)
     fun showProductDetailed(product: RemoteProduct)
+
+    @StateStrategyType(SkipStrategy::class)
+    fun logout()
 }

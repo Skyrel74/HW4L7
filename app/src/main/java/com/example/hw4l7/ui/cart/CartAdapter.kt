@@ -32,8 +32,6 @@ class CartAdapter(
         fun bind(product: RemoteProduct) {
             tvCartItemTitle.text = product.name
             tvCartItemPrice.text = product.price.toString()
-            tvCartItemDiscount.text = "${product.discountPercent} %"
-            tvCartItemDiscountPrice.text = product.calcDiscountPrice().toString()
             deleteProduct.setOnClickListener {
                 onDeleteClick(product)
             }

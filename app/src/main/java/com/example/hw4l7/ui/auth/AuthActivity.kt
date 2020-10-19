@@ -11,7 +11,6 @@ import com.example.hw4l7.ui.catalog.CatalogActivity
 import com.example.hw4l7.ui.signup.SignUpActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_auth.*
-import kotlinx.android.synthetic.main.activity_signup.*
 import moxy.ktx.moxyPresenter
 
 class AuthActivity : BaseActivity(), AuthView {
@@ -19,13 +18,6 @@ class AuthActivity : BaseActivity(), AuthView {
     private lateinit var auth: FirebaseAuth
 
     private val presenter by moxyPresenter { AuthPresenter() }
-
-    // TODO(Implement Log out)
-//    public override fun onStart() {
-//        super.onStart()
-//        val currentUser = auth.currentUser
-//        updateUI(currentUser)
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +35,8 @@ class AuthActivity : BaseActivity(), AuthView {
     }
 
     override fun checkForm() {
-        val email = SignUpEmail.text.toString()
-        val password = SignUpPassword.text.toString()
+        val email = EmailAuth.text.toString()
+        val password = PasswordAuth.text.toString()
 
         if (email.isEmpty()) {
             EmailAuth.error = "Please enter email"
@@ -65,11 +57,11 @@ class AuthActivity : BaseActivity(), AuthView {
         }
 
         if (password.length < 6) {
-            SignUpPassword.error = "Password must be at least 6 characters"
-            SignUpPassword.requestFocus()
+            PasswordAuth.error = "Password must be at least 6 characters"
+            PasswordAuth.requestFocus()
             return
         }
-        presenter.logIn(SignUpEmail.text.toString(), SignUpPassword.text.toString())
+        presenter.logIn(EmailAuth.text.toString(), PasswordAuth.text.toString())
     }
 
     override fun showLogInError() =

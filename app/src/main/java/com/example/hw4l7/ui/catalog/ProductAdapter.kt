@@ -2,9 +2,11 @@ package com.example.hw4l7.ui.catalog
 
 import android.content.Context
 import android.graphics.Rect
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -33,6 +35,7 @@ class ProductAdapter(
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(categories[position])
     }
@@ -43,7 +46,7 @@ class ProductAdapter(
         fun bind(product: RemoteProduct) {
             containerView.setOnClickListener { onProductClick(product) }
             catalogItemTitle.text = product.name
-            Glide.with(context).load(product.imageUrl).into(catalogItemImg)
+            Glide.with(context).load(product.img).into(catalogItemImg)
         }
     }
 

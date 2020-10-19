@@ -40,6 +40,7 @@
     <string name="productNaming">Название продукта</string>
     <string name="productDescription">Описание продукта</string>
     <string name="addToCart">Добавить в корзину</string>
+    <string name="delProd">Удалить товар</string>
     <string name="price">Цена</string>
     <!-- Detailed Items -->
     <string name="param">Параметр продукта</string>
@@ -65,5 +66,6 @@
     <string name="LogInHeader">Вход</string>
     <string name="SignUpBtn">Регистрация</string>
     <string name="LogInBtn">Войти</string>
+    <string name="bottom_to_log_out">Bottom to log out</string>
 
 </resources>
